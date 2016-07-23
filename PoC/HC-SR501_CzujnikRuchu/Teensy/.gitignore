@@ -1,8 +1,8 @@
-*
-!*/
-!*.c
-!*.h
-!MakeFile
-!*.json
-!*.hex
-!.gitignore
+*.d
+*.eep
+*.elf
+*.lss
+*.lst
+*.map
+*.o
+*.sym
