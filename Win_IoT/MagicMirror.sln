@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotionSensorService", "Motion sensor\MotionSensorService.csproj", "{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror", "WPF Client\MagicMirror.csproj", "{3F318C00-AABF-4F55-95DD-C517AF1A2079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|ARM.Build.0 = Debug|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x64.ActiveCfg = Debug|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x64.Build.0 = Debug|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x64.Deploy.0 = Debug|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x86.ActiveCfg = Debug|x86
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x86.Build.0 = Debug|x86
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Debug|x86.Deploy.0 = Debug|x86
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|ARM.ActiveCfg = Release|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|ARM.Build.0 = Release|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|ARM.Deploy.0 = Release|ARM
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x64.ActiveCfg = Release|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x64.Build.0 = Release|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x64.Deploy.0 = Release|x64
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x86.ActiveCfg = Release|x86
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x86.Build.0 = Release|x86
+		{3CF16EAB-8FB7-4006-8AD5-29A8AEAB6D9A}.Release|x86.Deploy.0 = Release|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|ARM.Build.0 = Debug|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|ARM.Deploy.0 = Debug|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x64.ActiveCfg = Debug|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x64.Build.0 = Debug|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x64.Deploy.0 = Debug|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x86.ActiveCfg = Debug|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x86.Build.0 = Debug|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Debug|x86.Deploy.0 = Debug|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|ARM.ActiveCfg = Release|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|ARM.Build.0 = Release|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|ARM.Deploy.0 = Release|ARM
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x64.ActiveCfg = Release|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x64.Build.0 = Release|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x64.Deploy.0 = Release|x64
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x86.ActiveCfg = Release|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x86.Build.0 = Release|x86
+		{3F318C00-AABF-4F55-95DD-C517AF1A2079}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
