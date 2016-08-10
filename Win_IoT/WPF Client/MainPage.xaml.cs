@@ -22,11 +22,9 @@ namespace MotionSensor
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
-    {
-        //private DispatcherTimer timer;
+    {        
         private MotionSensorService.MotionSensor motionSensor;
-        private DispatcherTimer timer;
-
+        
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,26 +32,29 @@ namespace MotionSensor
             motionSensor = new MotionSensorService.MotionSensor();
             motionSensor.InitGPIO();
             motionSensor.MotionDetected += MotionSensor_MotionDetected;
+            motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-
-
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(500);
+            //timer.Tick += Timer_Tick;
+            //timer.Start();
         }
 
-        private void Timer_Tick(object sender, object e)
+        private void MotionSensor_MotionUndetected(MotionSensorService.MotionSensor sender, string args)
         {
-            var value = motionSensor.Read();
-            if (value == "High")
-                GpioStatus.Items.Add("Motion detected at " + DateTime.Now);
+            GpioStatus.Items.Insert(0, "Motion undetected at " + DateTime.Now);
         }
 
         private void MotionSensor_MotionDetected(MotionSensorService.MotionSensor sender, string e)
         {
-            //GpioStatus.Text += "\r\nMotion detected at " + DateTime.Now;
+            GpioStatus.Items.Insert(0,"Motion detected at " + DateTime.Now);
         }
-        
+
+        //private void Timer_Tick(object sender, object e)
+        //{
+        //    var value = motionSensor.Read();
+        //    if (value == "High")
+        //        GpioStatus.Items.Add("Motion detected at " + DateTime.Now);
+        //}
     }
 }

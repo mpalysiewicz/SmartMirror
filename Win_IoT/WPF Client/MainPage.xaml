@@ -9,6 +9,6 @@
 
     <Grid Background="Black">        
         <TextBlock Foreground="White" Margin="30,30,30,30">Motion sensor value: </TextBlock>
-        <ListBox Foreground="White" Margin="30,60,30,30" Name="GpioStatus"></ListBox>
+        <ListBox Foreground="White" Margin="30,60,30,30" Name="GpioStatus" Background="Black" ScrollViewer.VerticalScrollMode="Auto"></ListBox>
     </Grid>
 </Page>

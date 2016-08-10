@@ -31,20 +31,26 @@ namespace MotionSensorService
                 return;
             }
 
-            motionSensorPin.SetDriveMode(GpioPinDriveMode.Input);
+            motionSensorPin.SetDriveMode(GpioPinDriveMode.Input); //TODO: Is it correct mode?
             
             motionSensorPin.ValueChanged += MotionSensorPin_ValueChanged;
+
+            //Calibration time
+            Task.Delay(15000).Wait();
+            Read();
             //GPIO pin initialized correctly.
         }
 
         private void MotionSensorPin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
             if (args.Edge == GpioPinEdge.RisingEdge)
-
                 MotionDetected.Invoke(this, null);
+            else
+                MotionUndetected.Invoke(this, null);
         }
 
-        public event Windows.Foundation.TypedEventHandler<MotionSensor,string> MotionDetected;
+        public event Windows.Foundation.TypedEventHandler<MotionSensor, string> MotionDetected;
+        public event Windows.Foundation.TypedEventHandler<MotionSensor, string> MotionUndetected;
 
         public string Read()
         {
