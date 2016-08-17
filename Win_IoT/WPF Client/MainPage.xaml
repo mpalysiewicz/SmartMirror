@@ -8,10 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="Black">
-
         <TextBlock Foreground="White" Margin="30,30,179,585">Temperature/Humidity:</TextBlock>
         <TextBlock Foreground="White" Margin="186,30,0,585" Name="TempStatus">N/A</TextBlock>
-        <TextBlock Foreground="White" Margin="30,60,186,553">Motion sensor value: </TextBlock>
-        <ListBox Foreground="White" Margin="30,92,30,30" Name="GpioStatus" Background="Black" ScrollViewer.VerticalScrollMode="Auto"></ListBox>        
+        <TextBlock Foreground="White" Margin="30,60,106,523" Name="MotionStatus">
+            <Run Text="Last motion detection&#x0a;"/>
+            <Run Text="From: "/><Run Text="{Binding From}"/><Run Text="&#x0a;To: "/><Run Text="{Binding To}"/>
+        </TextBlock>
     </Grid>
 </Page>
