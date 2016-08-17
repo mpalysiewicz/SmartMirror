@@ -1,5 +1,4 @@
 ﻿using Windows.Devices.Gpio;
-using static App4.GpioController;
 
 // TODO
 // initialization:
@@ -8,7 +7,7 @@ using static App4.GpioController;
 //    var result = _sensor.Distance;
 
 
-namespace DistanceSensorHCSR04
+namespace ABB.Sensors.Distance
 {
     public class DistanceSensorHCSR04
     {

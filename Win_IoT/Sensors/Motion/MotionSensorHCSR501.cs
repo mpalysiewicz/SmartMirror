@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-namespace MotionSensorService
+namespace ABB.Sensors.Motion
 {
-    public sealed class MotionSensor
+    public sealed class MotionSensorHCSR501 : IMotionSensor
     {
         GpioPin motionSensorPin;
         const int Pin_GPIO17 = 11;
@@ -49,8 +45,8 @@ namespace MotionSensorService
                 MotionUndetected.Invoke(this, null);
         }
 
-        public event Windows.Foundation.TypedEventHandler<MotionSensor, string> MotionDetected;
-        public event Windows.Foundation.TypedEventHandler<MotionSensor, string> MotionUndetected;
+        public event Windows.Foundation.TypedEventHandler<IMotionSensor, string> MotionDetected;
+        public event Windows.Foundation.TypedEventHandler<IMotionSensor, string> MotionUndetected;
 
         public string Read()
         {
