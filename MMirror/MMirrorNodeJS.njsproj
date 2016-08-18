@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{a5d4e1e7-f292-4fd3-b9a5-29a19e4a5388}</ProjectGuid>
+    <ProjectHome />
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>server.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include=".csscomb.json" />
+    <Content Include="environment.json" />
+    <Content Include="old.environment.json" />
+    <Content Include="package.json" />
+    <Content Include="quotes.json" />
+    <Content Include="README.md" />
+    <Compile Include="server.js" />
+    <Compile Include="routes\createProfileRoute.js" />
+    <Compile Include="routes\homeRoute.js" />
+    <Compile Include="routes\mirrorRoute.js" />
+    <Compile Include="routes\oxfordRoute.js" />
+    <Compile Include="routes\serverRoutes.js" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\LockScreenLogo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\SplashScreen.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\Square150x150Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\Square44x44Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\StoreLogo.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppxManifest.xml" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\AppxManifest.xml" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\LockScreenLogo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\SplashScreen.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\Square150x150Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\Square44x44Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\StoreLogo.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug\Magic Mirror UWP App.jsproj.FileListAbsolute.txt" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug\MultipleQualifiersPerDimensionFound.txt" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug\ProjectArchitectures.txt" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug\qualifiers.txt" />
+    <Content Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug\priconfig.xml" />
+    <Content Include="public\icons\01d.svg" />
+    <Content Include="public\icons\01n.svg" />
+    <Content Include="public\icons\02d.svg" />
+    <Content Include="public\icons\02n.svg" />
+    <Content Include="public\icons\03or4.svg" />
+    <Content Include="public\icons\09.svg" />
+    <Content Include="public\icons\10.svg" />
+    <Content Include="public\icons\11d.svg" />
+    <Content Include="public\icons\11n.svg" />
+    <Content Include="public\icons\13.svg" />
+    <Content Include="public\icons\50.svg" />
+    <Content Include="public\icons\arrow-up.svg" />
+    <Content Include="public\icons\icons.svg" />
+    <Compile Include="public\js\authenticate.js" />
+    <Compile Include="public\js\captureFace.js" />
+    <Compile Include="public\js\createProfile.js" />
+    <Compile Include="public\js\mirror.js" />
+    <Compile Include="public\js\news.js" />
+    <Compile Include="public\js\setupUtilities.js" />
+    <Compile Include="public\js\stock.js" />
+    <Compile Include="public\js\traffic.js" />
+    <Compile Include="public\js\weather.js" />
+    <Content Include="public\style\jquery-ui-reduced.css" />
+    <Content Include="public\style\style.css" />
+    <Content Include="views\layouts\main.html" />
+    <Content Include="views\partials\attribution.html" />
+    <Content Include="views\partials\captureFace.html" />
+    <Content Include="views\partials\createProfile.html" />
+    <Content Include="views\partials\emotion.html" />
+    <Content Include="views\partials\faceClose.html" />
+    <Content Include="views\partials\loggingOut.html" />
+    <Content Include="views\partials\mirror.html" />
+    <Content Include="views\partials\newsFeed.html" />
+    <Content Include="views\partials\nonUserDetected.html" />
+    <Content Include="views\partials\setup-header.html" />
+    <Content Include="views\partials\stocks.html" />
+    <Content Include="views\partials\timestamp.html" />
+    <Content Include="views\partials\traffic.html" />
+    <Content Include="views\partials\userDetected.html" />
+    <Content Include="views\partials\weather.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Magic Mirror UWP App" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\images" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\AppX\microsoft.system.package.metadata" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bin\Debug\ReverseMap" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bld" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\bld\Debug" />
+    <Folder Include="Magic Mirror UWP App\Magic Mirror UWP App\images" />
+    <Folder Include="public" />
+    <Folder Include="public\icons" />
+    <Folder Include="public\js" />
+    <Folder Include="public\style" />
+    <Folder Include="public\style\sass" />
+    <Folder Include="public\style\sass\mirror" />
+    <Folder Include="public\style\sass\setup" />
+    <Folder Include="routes" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\node\" />
+    <Folder Include="views" />
+    <Folder Include="views\layouts" />
+    <Folder Include="views\partials" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
