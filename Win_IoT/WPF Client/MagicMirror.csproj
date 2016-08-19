@@ -127,6 +127,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sensors\Distance\ABB.Sensors.Distance.csproj">
+      <Project>{361611f5-d58d-4c60-af30-027e7e1d33c3}</Project>
+      <Name>ABB.Sensors.Distance</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sensors\Motion\ABB.Sensors.Motion.csproj">
       <Project>{5451e666-ca8f-4cd9-ac41-168d6c66b6ca}</Project>
       <Name>ABB.Sensors.Motion</Name>

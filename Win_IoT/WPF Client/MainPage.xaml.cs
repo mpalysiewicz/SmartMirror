@@ -2,6 +2,8 @@
 using Windows.UI.Xaml.Controls;
 using ABB.Sensors.Motion;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
+using ABB.Sensors.Distance;
 
 namespace ABB.MagicMirror
 {
@@ -16,6 +18,8 @@ namespace ABB.MagicMirror
         }
 
         private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
+        private DistanceSensorHCSR04 distanceSensor;
+        private DispatcherTimer timer;
 
         public MainPage()
         {
@@ -30,6 +34,22 @@ namespace ABB.MagicMirror
 
             temperatureSensor = new TemperatureSensorServiceWrapper.TemperatureSensor(10000);
             temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
+
+
+            distanceSensor = new DistanceSensorHCSR04(27, 22);
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(5000);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private async void Timer_Tick(object sender, object e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var result = distanceSensor.Distance;
+                distanceTbx.Text = result.ToString();
+            });
         }
 
         private async void MotionSensor_MotionUndetected(IMotionSensor sender, string args)

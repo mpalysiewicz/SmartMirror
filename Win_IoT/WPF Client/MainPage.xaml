@@ -14,5 +14,7 @@
             <Run Text="Last motion detection&#x0a;"/>
             <Run Text="From: "/><Run Text="{Binding From}"/><Run Text="&#x0a;To: "/><Run Text="{Binding To}"/>
         </TextBlock>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="30,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85">Distance:</TextBlock>
+        <TextBlock x:Name="distanceTbx" HorizontalAlignment="Left" Margin="120,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="85"/>
     </Grid>
 </Page>
