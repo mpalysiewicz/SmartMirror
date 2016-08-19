@@ -8,13 +8,18 @@
     mc:Ignorable="d">
 
     <Grid Background="Black">
-        <TextBlock Foreground="White" Margin="30,30,179,585">Temperature/Humidity:</TextBlock>
-        <TextBlock Foreground="White" Margin="186,30,0,585" Name="TempStatus">N/A</TextBlock>
-        <TextBlock Foreground="White" Margin="30,60,106,523" Name="MotionStatus">
-            <Run Text="Last motion detection&#x0a;"/>
-            <Run Text="From: "/><Run Text="{Binding From}"/><Run Text="&#x0a;To: "/><Run Text="{Binding To}"/>
-        </TextBlock>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="30,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85">Distance:</TextBlock>
-        <TextBlock x:Name="distanceTbx" HorizontalAlignment="Left" Margin="120,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="85"/>
+        <TextBlock Foreground="White" Margin="30,60,165,555">Temperature/Humidity:</TextBlock>
+        <TextBlock Foreground="White" Margin="200,60,0,555" Name="TempStatus">N/A</TextBlock>
+        <TextBlock Foreground="White" Margin="30,90,106,530" Name="MotionStatus" Text="Last motion detection:" />
+        <TextBlock Foreground="White" Margin="30,120,106,489" Name="MotionDectedLbl" Text="From: " />
+        <TextBlock Foreground="White" Margin="80,120,106,495" Name="MotionDectedTbx" Text="-" />
+        <TextBlock Foreground="White" Margin="30,150,106,466" Name="MotionUnDectedLbl" Text="To: " />
+        <TextBlock Foreground="White" Margin="80,150,106,466" Name="MotionUnDectedTbx" Text="-" />
+
+        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
+        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
+
+        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="29,287,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85"/>
+        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="59,287,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000"/>
     </Grid>
 </Page>
