@@ -1,4 +1,8 @@
-﻿using Windows.Devices.Gpio;
+﻿using System;
+using Windows.Devices.Gpio;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
 
 // TODO
 // initialization:
@@ -9,43 +13,95 @@
 
 namespace ABB.Sensors.Distance
 {
-    public class DistanceSensorHCSR04
+    public class DistanceSensorHCSR04 : IDistanceSensor
     {
         private GpioPin TriggerPin { get; set; }
         private GpioPin EchoPin { get; set; }
-        private const double SPEED_OF_SOUND_METERS_PER_SECOND = 343;
+        private static Stopwatch stopWatch = new Stopwatch();
+        private static ManualResetEvent manualResetEvent = new ManualResetEvent(false);
 
-        public DistanceSensorHCSR04(int triggerPin, int echoPin)
+        public event Windows.Foundation.TypedEventHandler<IDistanceSensor, string> DistanceChanged;
+
+        public void InitGPIO()
         {
-            var controller = GpioController.GetDefault();
+            var gpio = GpioController.GetDefault();
+            if (gpio == null)
+            {
+                TriggerPin = null;
+                EchoPin = null;
+                return;
+            }
 
-            TriggerPin = controller.OpenPin(triggerPin);
+            TriggerPin = gpio.OpenPin(27);
+            EchoPin = gpio.OpenPin(22);
+            if(TriggerPin == null || EchoPin == null)
+            {
+                return;
+            }
+
             TriggerPin.SetDriveMode(GpioPinDriveMode.Output);
-
-            EchoPin = controller.OpenPin(echoPin);
             EchoPin.SetDriveMode(GpioPinDriveMode.Input);
+
+            TriggerPin.ValueChanged += DistanceSensor_ValueChanged;
+
+            Read();
         }
 
-        private double LengthOfHighPulse
+        private void DistanceSensor_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
-            get
-            {
-                TriggerPin.Write(GpioPinValue.Low);
-                Gpio.Sleep(50);
-                TriggerPin.Write(GpioPinValue.High);
-                Gpio.Sleep(100);
-                TriggerPin.Write(GpioPinValue.Low);
+            DistanceChanged.Invoke(this, null);
+        }
 
-                return Gpio.GetTimeUntilNextEdge(EchoPin, GpioPinValue.High, 1000);
+        public static void Sleep(int delayMicroseconds)
+        {
+            manualResetEvent.WaitOne(TimeSpan.FromMilliseconds(delayMicroseconds / 1000d));
+        }
+
+        public static double GetTimeUntilNextEdge(GpioPin pin, GpioPinValue edgeToWaitFor, int maximumTimeToWaitInMilliseconds)
+        {
+            var t = Task.Run(() =>
+            {
+                stopWatch.Reset();
+
+                while (pin.Read() != edgeToWaitFor) { };
+
+                stopWatch.Start();
+
+                while (pin.Read() == edgeToWaitFor) { };
+
+                stopWatch.Stop();
+
+                return stopWatch.Elapsed.TotalSeconds;
+            });
+
+            var isCompleted = t.Wait(TimeSpan.FromMilliseconds(maximumTimeToWaitInMilliseconds));
+
+            if (isCompleted)
+            {
+                return t.Result;
+            }
+            else
+            {
+                return 0.0d;
             }
         }
 
-        public double Distance
+        private double GetLengthOfHighPulse()
         {
-            get
-            {
-                return (SPEED_OF_SOUND_METERS_PER_SECOND / 2) * LengthOfHighPulse;
-            }
+            TriggerPin.Write(GpioPinValue.Low);
+            Sleep(5);
+            TriggerPin.Write(GpioPinValue.High);
+            Sleep(10);
+            TriggerPin.Write(GpioPinValue.Low);
+
+            return GetTimeUntilNextEdge(EchoPin, GpioPinValue.High, 100);
+        }
+
+        public string Read()
+        {
+            var lengthOfHighPulse = GetLengthOfHighPulse();
+
+            return Math.Round(17150 * lengthOfHighPulse, 2).ToString();
         }
     }
 }

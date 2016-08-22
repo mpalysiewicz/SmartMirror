@@ -107,8 +107,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DistanceSensorFactory.cs" />
     <Compile Include="DistanceSensorHCSR04.cs" />
-    <Compile Include="Gpio.cs" />
+    <Compile Include="IDistanceSensor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Distance_sensor.rd.xml" />
   </ItemGroup>

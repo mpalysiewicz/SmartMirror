@@ -8,7 +8,7 @@ namespace TemperatureSensorServiceWrapper
     public sealed class TemperatureSensor
     {
         private TemperatureSensorService.Dht22Sensor temperatureSensor;
-        private GpioPin pin;
+        private Windows.Devices.Gpio.GpioPin pin;
         private Timer timer;
 
         public event EventHandler<TemperatureReadingArgs> TemperatureRead;

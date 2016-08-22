@@ -2,20 +2,21 @@
 using Windows.UI.Xaml.Controls;
 using ABB.Sensors.Motion;
 using Windows.UI.Core;
+using ABB.Sensors.Distance;
+using Windows;
 
 namespace ABB.MagicMirror
 {
     public sealed partial class MainPage : Page
-    {        
-        private IMotionSensor motionSensor;
+    {
+        private IDistanceSensor _distanceSensor;
+        private IMotionSensor _motionSensor;
         private MotionDetectionResult motionDetectionResults;
-        private class MotionDetectionResult
+        internal class MotionDetectionResult
         {
             public DateTime From { get; set; }
             public DateTime To { get; set; }
         }
-
-        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
 
         public MainPage()
         {
@@ -23,13 +24,22 @@ namespace ABB.MagicMirror
             motionDetectionResults = new MotionDetectionResult();
             MotionStatus.DataContext = motionDetectionResults;
 
-            motionSensor = MotionSensorFactory.Create();
-            motionSensor.InitGPIO();
-            motionSensor.MotionDetected += MotionSensor_MotionDetected;
-            motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
+            _motionSensor = MotionSensorFactory.Create();
+            _motionSensor.InitGPIO();
+            _motionSensor.MotionDetected += MotionSensor_MotionDetected;
+            _motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
-            temperatureSensor = new TemperatureSensorServiceWrapper.TemperatureSensor(10000);
-            temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
+            _distanceSensor = DistanceSensorFactory.Create();
+            _distanceSensor.InitGPIO();
+            _distanceSensor.DistanceChanged += DistanceSensor_DistanceChanged;
+        }
+
+        private async void DistanceSensor_DistanceChanged(IDistanceSensor sender, string args)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                currentDistance.Text = sender.Read();
+            });
         }
 
         private async void MotionSensor_MotionUndetected(IMotionSensor sender, string args)
@@ -48,12 +58,12 @@ namespace ABB.MagicMirror
             });
         }
 
-        private async void TemperatureSensor_TemperatureRead(object sender, TemperatureSensorServiceWrapper.TemperatureReadingArgs e)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
-            });
-        }
+        //private async void TemperatureSensor_TemperatureRead(object sender, TemperatureSensorServiceWrapper.TemperatureReadingArgs e)
+        //{
+        //    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+        //    {
+        //        TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
+        //    });
+        //}
     }
 }

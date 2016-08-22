@@ -127,13 +127,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sensors\Distance\ABB.Sensors.Distance.csproj">
+      <Project>{361611F5-D58D-4C60-AF30-027E7E1D33C3}</Project>
+      <Name>ABB.Sensors.Distance</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sensors\Motion\ABB.Sensors.Motion.csproj">
       <Project>{5451e666-ca8f-4cd9-ac41-168d6c66b6ca}</Project>
       <Name>ABB.Sensors.Motion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TemperatureSensorServiceWrapper\TemperatureSensorServiceWrapper.csproj">
-      <Project>{5be1a123-2da8-43b4-adcf-1df06590d556}</Project>
-      <Name>TemperatureSensorServiceWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -14,5 +14,11 @@
             <Run Text="Last motion detection&#x0a;"/>
             <Run Text="From: "/><Run Text="{Binding From}"/><Run Text="&#x0a;To: "/><Run Text="{Binding To}"/>
         </TextBlock>
+        <TextBlock Foreground="White" Margin="30,122,179,493">
+            <Run Text="Current distance : "/>
+        </TextBlock>
+        <TextBlock Foreground="White" Margin="186,122,0,493" x:Name="currentDistance">
+            <Run Text="N/A"/>
+        </TextBlock>
     </Grid>
 </Page>
