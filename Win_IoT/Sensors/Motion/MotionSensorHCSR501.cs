@@ -6,7 +6,7 @@ namespace ABB.Sensors.Motion
     public sealed class MotionSensorHCSR501 : IMotionSensor
     {
         GpioPin motionSensorPin;
-        const int Pin_GPIO17 = 11;
+        const int Pin_GPIO26 = 26;
 
         public void InitGPIO()
         {
@@ -19,7 +19,7 @@ namespace ABB.Sensors.Motion
                 return;
             }
 
-            motionSensorPin = gpio.OpenPin(Pin_GPIO17, GpioSharingMode.Exclusive);
+            motionSensorPin = gpio.OpenPin(Pin_GPIO26, GpioSharingMode.Exclusive);
                         
             if (motionSensorPin == null)
             {
@@ -27,8 +27,8 @@ namespace ABB.Sensors.Motion
                 return;
             }
 
-            motionSensorPin.DebounceTimeout = System.TimeSpan.FromMilliseconds(500);
-            motionSensorPin.SetDriveMode(GpioPinDriveMode.Input); //TODO: Is it correct mode?
+            //motionSensorPin.DebounceTimeout = System.TimeSpan.FromMilliseconds(50);
+            motionSensorPin.SetDriveMode(GpioPinDriveMode.Input);
             
             motionSensorPin.ValueChanged += MotionSensorPin_ValueChanged;
 
@@ -38,14 +38,17 @@ namespace ABB.Sensors.Motion
             //GPIO pin initialized correctly.
         }
 
+        GpioPinEdge currentValue = GpioPinEdge.FallingEdge;
+
         private void MotionSensorPin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
-            if (args.Edge == GpioPinEdge.RisingEdge && MotionDetected != null)
+            if (args.Edge == GpioPinEdge.RisingEdge && currentValue != GpioPinEdge.RisingEdge && MotionDetected != null)
                 MotionDetected.Invoke(this, null);
-            else if (MotionUndetected != null)
+            else if (currentValue != GpioPinEdge.FallingEdge && MotionUndetected != null)
                 MotionUndetected.Invoke(this, null);
 
-            Task.Delay(5000).Wait();
+            currentValue = args.Edge;
+            //Task.Delay(5000).Wait();
         }
 
         public event Windows.Foundation.TypedEventHandler<IMotionSensor, string> MotionDetected;

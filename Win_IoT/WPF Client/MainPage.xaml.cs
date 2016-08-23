@@ -53,7 +53,7 @@ namespace ABB.MagicMirror
 
         private void ShowIpAddress()
         {
-            ipAddressTbx.Text = string.Join(",", Helpers.Networking.GetLocalIpAddress());
+            ipAddressTbx.Text = string.Join(",  ", Helpers.Networking.GetLocalIpAddress());
         }
 
         private async void Timer_Tick(object sender, object e)
