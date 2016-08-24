@@ -70,6 +70,7 @@ namespace ABB.MagicMirror
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MotionUnDectedTbx.Text = DateTime.Now.ToString();
+                MotionLed.Off();
             });            
         }
 
@@ -78,6 +79,7 @@ namespace ABB.MagicMirror
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MotionDectedTbx.Text = DateTime.Now.ToString();
+                MotionLed.On();
             });
         }
 

@@ -1,23 +1,37 @@
 ﻿<Page
     x:Class="ABB.MagicMirror.MainPage"
+    xmlns:local="using:ABB.MagicMirror.Controls" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MotionSensor"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="Black">
-        <TextBlock Foreground="White" Margin="30,60,165,555">Temperature/Humidity:</TextBlock>
-        <TextBlock Foreground="White" Margin="200,60,0,555" Name="TempStatus">N/A</TextBlock>
-        <TextBlock Foreground="White" Margin="30,90,106,530" Name="MotionStatus" Text="Last motion detection:" />
-        <TextBlock Foreground="White" Margin="30,120,106,489" Name="MotionDectedLbl" Text="From: " />
-        <TextBlock Foreground="White" Margin="80,120,106,495" Name="MotionDectedTbx" Text="-" />
-        <TextBlock Foreground="White" Margin="30,150,106,466" Name="MotionUnDectedLbl" Text="To: " />
-        <TextBlock Foreground="White" Margin="80,150,106,466" Name="MotionUnDectedTbx" Text="-" />
-
         <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
         <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
+        
+        <TextBlock Foreground="White" Margin="30,60,165,555">Temperature/Humidity:</TextBlock>
+        <TextBlock Foreground="White" Margin="200,60,0,555" Name="TempStatus">N/A</TextBlock>
+        
+        <Grid Margin="30,90,0,0" Width="Auto" Height="Auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>            
+            <TextBlock Foreground="White" Name="MotionStatus" Text="Last motion detection:" Grid.ColumnSpan="3"/>
+            <local:LED Width="30" Height="30" Grid.Row="1" Grid.RowSpan="2" x:Name="MotionLed"  />
+            <TextBlock Foreground="White" Name="MotionDectedLbl" Text="From: " Grid.Row="1" Grid.Column="1" />
+            <TextBlock Foreground="White" Name="MotionDectedTbx" Text="-" Grid.Row="1" Grid.Column="2" />
+            <TextBlock Foreground="White" Name="MotionUnDectedLbl" Text="To: " Grid.Row="2" Grid.Column="1" />
+            <TextBlock Foreground="White" Name="MotionUnDectedTbx" Text="-" Grid.Row="2" Grid.Column="2" />
+        </Grid>
 
         <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="29,287,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85"/>
         <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="59,287,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000"/>
