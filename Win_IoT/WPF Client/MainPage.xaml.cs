@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
 using ABB.Sensors.Motion;
+using ABB.Sensors.TemperatureWrapper;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
@@ -22,7 +23,7 @@ namespace ABB.MagicMirror
             public DateTime To { get; set; }
         }
 
-        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
+        private TemperatureSensor temperatureSensor;
         private DistanceSensorHCSR04 distanceSensor;
         private DispatcherTimer timer;
 
@@ -40,7 +41,7 @@ namespace ABB.MagicMirror
             motionSensor.MotionDetected += MotionSensor_MotionDetected;
             motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
-            temperatureSensor = new TemperatureSensorServiceWrapper.TemperatureSensor(10000);
+            temperatureSensor = new TemperatureSensor(10000);
             temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
 
             //temporary disabled - CPU consumption to be checked...
@@ -83,7 +84,7 @@ namespace ABB.MagicMirror
             });
         }
 
-        private async void TemperatureSensor_TemperatureRead(object sender, TemperatureSensorServiceWrapper.TemperatureReadingArgs e)
+        private async void TemperatureSensor_TemperatureRead(object sender, TemperatureReadingArgs e)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
