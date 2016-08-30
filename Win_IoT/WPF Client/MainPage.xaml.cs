@@ -15,7 +15,6 @@ namespace ABB.MagicMirror
 {
     public sealed partial class MainPage : Page
     {
-        private IDistanceSensor _distanceSensor;
         private IMotionSensor _motionSensor;
         private MotionDetectionResult motionDetectionResults;
         internal class MotionDetectionResult
@@ -24,8 +23,8 @@ namespace ABB.MagicMirror
             public DateTime To { get; set; }
         }
 
-        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
-        private DistanceSensorHCSR04 distanceSensor;
+        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
+        private DistanceSensorHCSR04 _distanceSensor;
         private DispatcherTimer timer;
 
         public MainPage()
@@ -42,16 +41,13 @@ namespace ABB.MagicMirror
             _motionSensor.MotionDetected += MotionSensor_MotionDetected;
             _motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
-            _distanceSensor = DistanceSensorFactory.Create();
-            _distanceSensor.InitGPIO();
-            _distanceSensor.DistanceChanged += DistanceSensor_DistanceChanged;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Tick += Timer_Tick;
+            timer.Start();
 
-            //temporary disabled - CPU consumption to be checked...
-            //distanceSensor = new DistanceSensorHCSR04(27, 22);
-            //timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(5000);
-            //timer.Tick += Timer_Tick;
-            //timer.Start();
+            _distanceSensor = new DistanceSensorHCSR04();
+            _distanceSensor.InitGPIO();
         }
 
         private void ShowIpAddress()
@@ -61,20 +57,12 @@ namespace ABB.MagicMirror
 
         private async void Timer_Tick(object sender, object e)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var result = distanceSensor.Distance;
-                distanceTbx.Text = result.ToString();
+                currentDistance.Text = _distanceSensor.Read();
             });
         }
 
-        private async void DistanceSensor_DistanceChanged(IDistanceSensor sender, string args)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                currentDistance.Text = sender.Read();
-            });
-        }
         private async void MotionSensor_MotionUndetected(IMotionSensor sender, string args)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

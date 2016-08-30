@@ -13,14 +13,12 @@ using System.Threading;
 
 namespace ABB.Sensors.Distance
 {
-    public class DistanceSensorHCSR04 : IDistanceSensor
+    public class DistanceSensorHCSR04
     {
         private GpioPin TriggerPin { get; set; }
         private GpioPin EchoPin { get; set; }
         private static Stopwatch stopWatch = new Stopwatch();
         private static ManualResetEvent manualResetEvent = new ManualResetEvent(false);
-
-        public event Windows.Foundation.TypedEventHandler<IDistanceSensor, string> DistanceChanged;
 
         public void InitGPIO()
         {
@@ -41,15 +39,6 @@ namespace ABB.Sensors.Distance
 
             TriggerPin.SetDriveMode(GpioPinDriveMode.Output);
             EchoPin.SetDriveMode(GpioPinDriveMode.Input);
-
-            TriggerPin.ValueChanged += DistanceSensor_ValueChanged;
-
-            Read();
-        }
-
-        private void DistanceSensor_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
-        {
-            DistanceChanged.Invoke(this, null);
         }
 
         public static void Sleep(int delayMicroseconds)

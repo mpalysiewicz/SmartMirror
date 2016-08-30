@@ -8,9 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="Black">
-        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
-        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
-        
         <TextBlock Foreground="White" Margin="30,60,165,555">Temperature/Humidity:</TextBlock>
         <TextBlock Foreground="White" Margin="200,60,0,555" Name="TempStatus">N/A</TextBlock>
         
