@@ -4,14 +4,12 @@ using ABB.Sensors.Motion;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
-using ABB.Sensors.TemperatureWrapper;
-using TemperatureSensorServiceWrapper;
 
 namespace ABB.MagicMirror
 {
     public sealed partial class MainPage : Page
     {
-        private IMotionSensor _motionSensor;
+        private IMotionSensor motionSensor;
         private MotionDetectionResult motionDetectionResults;
         internal class MotionDetectionResult
         {
@@ -32,10 +30,10 @@ namespace ABB.MagicMirror
             motionDetectionResults = new MotionDetectionResult();
             MotionStatus.DataContext = motionDetectionResults;
 
-            _motionSensor = MotionSensorFactory.Create();
-            _motionSensor.InitGPIO();
-            _motionSensor.MotionDetected += MotionSensor_MotionDetected;
-            _motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
+            motionSensor = MotionSensorFactory.Create();
+            motionSensor.InitGPIO();
+            motionSensor.MotionDetected += MotionSensor_MotionDetected;
+            motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
             temperatureSensor = new TemperatureSensor(10000);
             temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
@@ -83,7 +81,8 @@ namespace ABB.MagicMirror
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
+                TemperatureValue.Text = e.Temperature + "°C";
+                HumidiyValue.Text = e.Humidity + "%";
             });
         }
     }
