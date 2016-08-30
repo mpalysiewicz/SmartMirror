@@ -5,11 +5,6 @@ using ABB.Sensors.TemperatureWrapper;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
-using System.Net.Sockets;
-using Windows.Networking.Connectivity;
-using Windows.Networking;
-using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace ABB.MagicMirror
 {
@@ -88,7 +83,8 @@ namespace ABB.MagicMirror
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
+                TemperatureValue.Text = e.Temperature + "°C";
+                HumidiyValue.Text = e.Humidity + "%";
             });
         }
     }

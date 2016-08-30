@@ -5,16 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="1280" Width="1023">
 
     <Grid Background="Black">
-        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
-        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
         
-        <TextBlock Foreground="White" Margin="30,60,165,555">Temperature/Humidity:</TextBlock>
-        <TextBlock Foreground="White" Margin="200,60,0,555" Name="TempStatus">N/A</TextBlock>
-        
-        <Grid Margin="30,90,0,0" Width="Auto" Height="Auto">
+        <Grid Margin="30,40,165,555">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>                
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Foreground="White" Grid.Row="0" Grid.Column="0" TextAlignment="Center">Temperature</TextBlock>
+            <TextBlock Foreground="White" Grid.Row="0" Grid.Column="2" TextAlignment="Center">Humidity</TextBlock>
+            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="0" Name="TemperatureValue" TextAlignment="Center" FontSize="36">-</TextBlock>
+            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="2" Name="HumidiyValue" TextAlignment="Center" FontSize="36">-</TextBlock>
+        </Grid>
+                
+        <Grid Margin="30,130,0,0" Width="Auto" Height="Auto">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -25,7 +36,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>            
-            <TextBlock Foreground="White" Name="MotionStatus" Text="Last motion detection:" Grid.ColumnSpan="3"/>
+            <TextBlock Foreground="White" Name="MotionStatus" Text="Last motion detection" Grid.ColumnSpan="3"/>
             <local:LED Width="30" Height="30" Grid.Row="1" Grid.RowSpan="2" x:Name="MotionLed"  />
             <TextBlock Foreground="White" Name="MotionDectedLbl" Text="From: " Grid.Row="1" Grid.Column="1" />
             <TextBlock Foreground="White" Name="MotionDectedTbx" Text="-" Grid.Row="1" Grid.Column="2" />
@@ -33,7 +44,10 @@
             <TextBlock Foreground="White" Name="MotionUnDectedTbx" Text="-" Grid.Row="2" Grid.Column="2" />
         </Grid>
 
-        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="29,287,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85"/>
-        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="59,287,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000"/>
+        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
+        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,250,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
+
+        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Right" Margin="0,40,275,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85"/>
+        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Right" Margin="0,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000"/>
     </Grid>
 </Page>
