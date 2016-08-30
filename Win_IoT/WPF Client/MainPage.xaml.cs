@@ -4,13 +4,9 @@ using ABB.Sensors.Motion;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
-using System.Net.Sockets;
-using Windows.Networking.Connectivity;
-using Windows.Networking;
-using System.Collections.Generic;
-using System.ComponentModel;
-using ABB.Sensors.Distance;
-using Windows;
+using ABB.Sensors.TemperatureWrapper;
+using TemperatureSensorServiceWrapper;
+
 namespace ABB.MagicMirror
 {
     public sealed partial class MainPage : Page
@@ -23,7 +19,7 @@ namespace ABB.MagicMirror
             public DateTime To { get; set; }
         }
 
-        private TemperatureSensorServiceWrapper.TemperatureSensor temperatureSensor;
+        private TemperatureSensor temperatureSensor;
         private DistanceSensorHCSR04 _distanceSensor;
         private DispatcherTimer timer;
 
@@ -41,6 +37,8 @@ namespace ABB.MagicMirror
             _motionSensor.MotionDetected += MotionSensor_MotionDetected;
             _motionSensor.MotionUndetected += MotionSensor_MotionUndetected;
 
+            temperatureSensor = new TemperatureSensor(10000);
+            temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += Timer_Tick;
@@ -81,12 +79,12 @@ namespace ABB.MagicMirror
             });
         }
 
-        //private async void TemperatureSensor_TemperatureRead(object sender, TemperatureSensorServiceWrapper.TemperatureReadingArgs e)
-        //{
-        //    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-        //    {
-        //        TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
-        //    });
-        //}
+        private async void TemperatureSensor_TemperatureRead(object sender, TemperatureReadingArgs e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                TempStatus.Text = e.Temperature + "°C /" + e.Humidity + "%";
+            });
+        }
     }
 }
