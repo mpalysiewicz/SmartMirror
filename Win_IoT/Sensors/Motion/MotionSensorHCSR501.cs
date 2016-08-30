@@ -41,14 +41,25 @@ namespace ABB.Sensors.Motion
         GpioPinEdge currentValue = GpioPinEdge.FallingEdge;
 
         private void MotionSensorPin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
-        {
-            if (args.Edge == GpioPinEdge.RisingEdge && currentValue != GpioPinEdge.RisingEdge && MotionDetected != null)
-                MotionDetected.Invoke(this, null);
-            else if (currentValue != GpioPinEdge.FallingEdge && MotionUndetected != null)
-                MotionUndetected.Invoke(this, null);
+        {            
+            if (currentValue == args.Edge) //TODO: Is it needed? the same edge should not happend twice, it is not state value but state change
+                return;
+            
+            switch(args.Edge)
+            {
+                case GpioPinEdge.RisingEdge:
+                    if (MotionDetected == null)
+                        return;
+                    MotionDetected.Invoke(this, null);
+                    break;
+                case GpioPinEdge.FallingEdge:
+                    if (MotionUndetected == null)
+                        return;                    
+                    MotionUndetected.Invoke(this, null);
+                    break;
+            }
 
-            currentValue = args.Edge;
-            //Task.Delay(5000).Wait();
+            currentValue = args.Edge;            
         }
 
         public event Windows.Foundation.TypedEventHandler<IMotionSensor, string> MotionDetected;
