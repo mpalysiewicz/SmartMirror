@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{5BE1A123-2DA8-43B4-ADCF-1DF06590D556}</ProjectGuid>
+    <ProjectGuid>{2E645A8B-FBFB-41DE-B0AD-E38F7F8CC44C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ABB.Sensors.TemperatureWrapper</RootNamespace>
@@ -116,15 +116,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ABB.Sensors.Temperature\TemperatureSensorService.vcxproj">
-      <Project>{79f97cbe-57fb-4afd-b4d6-a6f0fc7b39fd}</Project>
-      <Name>ABB.Sensors.Temperature</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="WindowsIoT, Version=10.0.10586.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ABB.Sensors.Temperature\TemperatureSensorService.vcxproj">
+      <Project>{23080b34-c32c-4d76-9dc3-820042284435}</Project>
+      <Name>ABB.Sensors.Temperature</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

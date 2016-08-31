@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{79f97cbe-57fb-4afd-b4d6-a6f0fc7b39fd}</ProjectGuid>
+    <ProjectGuid>{23080B34-C32C-4D76-9DC3-820042284435}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
     <RootNamespace>ABB.Sensors.Temperature</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

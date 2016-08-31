@@ -143,13 +143,9 @@
       <Project>{5451e666-ca8f-4cd9-ac41-168d6c66b6ca}</Project>
       <Name>ABB.Sensors.Motion</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sensors\Temperature\ABB.Sensors.Temperature\TemperatureSensorService.vcxproj">
-      <Project>{79f97cbe-57fb-4afd-b4d6-a6f0fc7b39fd}</Project>
-      <Name>ABB.Sensors.Temperature</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TemperatureSensorServiceWrapper\TemperatureSensorServiceWrapper.csproj">
-      <Project>{5BE1A123-2DA8-43B4-ADCF-1DF06590D556}</Project>
-      <Name>TemperatureSensorServiceWrapper</Name>
+    <ProjectReference Include="..\Sensors\Temperature\ABB.Sensors.TemperatureWrapper\ABB.Sensors.TemperatureWrapper.csproj">
+      <Project>{2e645a8b-fbfb-41de-b0ad-e38f7f8cc44c}</Project>
+      <Name>ABB.Sensors.TemperatureWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

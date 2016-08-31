@@ -4,6 +4,7 @@ using ABB.Sensors.Motion;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
+using ABB.Sensors.TemperatureWrapper;
 
 namespace ABB.MagicMirror
 {
@@ -53,9 +54,9 @@ namespace ABB.MagicMirror
 
         private async void Timer_Tick(object sender, object e)
         {
-            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                currentDistance.Text = _distanceSensor.Read();
+                distanceTbx.Text = _distanceSensor.Read();
             });
         }
 
