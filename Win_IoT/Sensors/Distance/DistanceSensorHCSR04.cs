@@ -32,13 +32,21 @@ namespace ABB.Sensors.Distance
 
             TriggerPin = gpio.OpenPin(27);
             EchoPin = gpio.OpenPin(22);
-            if(TriggerPin == null || EchoPin == null)
+            if(!IsInitialized)
             {
                 return;
             }
 
             TriggerPin.SetDriveMode(GpioPinDriveMode.Output);
             EchoPin.SetDriveMode(GpioPinDriveMode.Input);
+        }
+
+        private bool IsInitialized
+        {
+            get
+            {
+                return TriggerPin != null && EchoPin != null;
+            }
         }
 
         public static void Sleep(int delayMicroseconds)
@@ -88,6 +96,11 @@ namespace ABB.Sensors.Distance
 
         public string Read()
         {
+            if (!IsInitialized)
+            {
+                return string.Empty;
+            }
+
             var lengthOfHighPulse = GetLengthOfHighPulse();
 
             return Math.Round(17150 * lengthOfHighPulse, 2).ToString();

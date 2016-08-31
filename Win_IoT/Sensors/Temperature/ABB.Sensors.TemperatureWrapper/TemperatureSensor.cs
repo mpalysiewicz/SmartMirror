@@ -8,7 +8,7 @@ namespace ABB.Sensors.TemperatureWrapper
 {
     public sealed class TemperatureSensor
     {
-        private ABB.Sensors.Temperature.Dht22Sensor temperatureSensor;
+        private Temperature.Dht22Sensor temperatureSensor;
         private GpioPin pin;
         private Timer timer;
 
@@ -29,7 +29,7 @@ namespace ABB.Sensors.TemperatureWrapper
         {
             try
             {
-                ABB.Sensors.Temperature.TemperatureSensorReading temperatureReading = GetTemperatureSensorReadingResult();
+                Temperature.TemperatureSensorReading temperatureReading = GetTemperatureSensorReadingResult();
 
                 if (temperatureReading.IsValid && TemperatureRead != null)
                 {
@@ -42,13 +42,13 @@ namespace ABB.Sensors.TemperatureWrapper
             }
         }
 
-        private ABB.Sensors.Temperature.TemperatureSensorReading GetTemperatureSensorReadingResult()
+        private Temperature.TemperatureSensorReading GetTemperatureSensorReadingResult()
         {
-            ABB.Sensors.Temperature.TemperatureSensorReading temperatureReading = Task.Run(GetTemperatureSensorReading).Result;
+            Temperature.TemperatureSensorReading temperatureReading = Task.Run(GetTemperatureSensorReading).Result;
             return temperatureReading;
         }
 
-        private async Task<ABB.Sensors.Temperature.TemperatureSensorReading> GetTemperatureSensorReading()
+        private async Task<Temperature.TemperatureSensorReading> GetTemperatureSensorReading()
         {
             return await temperatureSensor.GetReadingAsync().AsTask();          
 
@@ -56,8 +56,21 @@ namespace ABB.Sensors.TemperatureWrapper
 
         private void InitGpio()
         {
-            pin = GpioController.GetDefault().OpenPin(4, GpioSharingMode.Exclusive);
-            temperatureSensor = new ABB.Sensors.Temperature.Dht22Sensor(pin, GpioPinDriveMode.Input);                        
+            var gpio = GpioController.GetDefault();
+            if (gpio == null)
+            {
+                //There is no GPIO controller on this device.
+                pin = null;
+                return;
+            }
+
+            pin = gpio.OpenPin(4, GpioSharingMode.Exclusive);
+            if (pin == null)
+            {
+                //There were problems initializing the GPIO pin.;
+                return;
+            }
+            temperatureSensor = new Temperature.Dht22Sensor(pin, GpioPinDriveMode.Input);                        
         }
 
 
