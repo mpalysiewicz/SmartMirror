@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GuiComponents\MotionSensorComponent.xaml.cs">
+      <DependentUpon>MotionSensorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Networking.cs" />
     <Compile Include="Controls\LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
@@ -126,6 +129,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\LED.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuiComponents\MotionSensorComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
