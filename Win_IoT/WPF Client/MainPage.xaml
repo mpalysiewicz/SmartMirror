@@ -9,22 +9,7 @@
     mc:Ignorable="d" Height="1280" Width="1023">
 
     <Grid Background="Black">
-        
-        <Grid Margin="30,40,165,555">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>                
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>                
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Foreground="White" Grid.Row="0" Grid.Column="0" TextAlignment="Center">Temperature</TextBlock>
-            <TextBlock Foreground="White" Grid.Row="0" Grid.Column="2" TextAlignment="Center">Humidity</TextBlock>
-            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="0" Name="TemperatureValue" TextAlignment="Center" FontSize="36">-</TextBlock>
-            <TextBlock Foreground="White" Grid.Row="1" Grid.Column="2" Name="HumidiyValue" TextAlignment="Center" FontSize="36">-</TextBlock>
-        </Grid>
+        <components:TemperatureAndHumidityComponent  Margin="30,40,165,555"/>
 
         <components:MotionSensorComponent  Margin="30,130,0,0"/>
         
