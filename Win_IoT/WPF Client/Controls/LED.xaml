@@ -10,15 +10,18 @@
             <Ellipse.Fill>
                 <LinearGradientBrush>
                     <LinearGradientBrush.RelativeTransform>                    
-                        <TransformGroup>
+                        <TransformGroup>                            
                             <ScaleTransform CenterY="0.35" CenterX="0.6" ScaleY="1" ScaleX="1" />
                             <SkewTransform AngleY="0" AngleX="0" CenterY="0.35" CenterX="0.6" />
                             <RotateTransform Angle="-4.447" CenterY="0.35" CenterX="0.6" />
                             <TranslateTransform X="0" Y="0" />
                         </TransformGroup>
                     </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="{Binding Color}" Offset="0.8" />
-                    <GradientStop Color="White" />
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop x:Name="LedColor"  Color="Black" Offset="0.8" />
+                        <GradientStop Color="White" />
+                    </LinearGradientBrush.GradientStops>
+                                                
                 </LinearGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
