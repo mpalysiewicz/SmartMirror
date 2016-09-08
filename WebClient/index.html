@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" /> 
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/roboto.css">
+		<link rel="stylesheet" type="text/css" href="css/weather-icons.css">
+		<link rel="stylesheet" type="text/css" href="css/weather-icons-wind.css">
+		<link rel="stylesheet" type="text/css" href="css/clock_analog.css">
+		<link rel="stylesheet" type="text/css" href="css/clock_digital.css">
+
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/pl.js"></script>
+		<script src="https://apis.google.com/js/api.js"></script>
+
+		<script src="config/config.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/oauth2.js"></script>
+		<script src="js/module_handler.js"></script>
+		
+		<!--
+		<script src="js/modules/outlook_feeder.js"></script>
+		<script src="js/modules/google_feeder.js"></script>
+		<script src="js/modules/calendar.js"></script>
+		-->
+
+		<script src="js/modules/weather.js"></script>
+		<script src="js/modules/clock_digital.js"></script>
+		<script src="js/modules/clock_analog.js"></script>
+		<script src="js/modules/calendar_outlook.js"></script>
+		<script src="js/modules/calendar_google.js"></script>
+	</head>
+	<body>
+		<div id="clock_digital" class="notloaded region top right medium">
+			<div id="clock_date"></div>
+			<div id="clock_time" class="light">
+				<span id="clock_time_hour_minute" class="large bright"></span> 
+				<span id="clock_time_second" class="medium" style="vertical-align: top"></span>
+			</div>
+		</div>
+
+		<div id="clock_analog" class="notloaded region middle center">
+			<div class="clock_analog circle">
+				<div id="hour" class="clock_analog hour"></div>
+				<div id="minute" class="clock_analog minute"></div><div id="second" class="clock_analog second"></div>
+				<div class="clock_analog dot"></div>
+			</div>
+		</div>
+
+		<div id="weather" class="notloaded region top left">
+			<div class="container">
+				<div>
+					<span style="width: 40px; display: inline-block; text-align: center"><i id="weather_icon"></i></span>
+					<span id="weather_description"></span>
+				</div>
+				<div>
+					<span style="width: 40px; display: inline-block; text-align: center"><i class="wi wi-thermometer"></i></span>
+					<span><span id="weather_temp"></span> [<span id="weather_temp_min"></span> - <span id="weather_temp_max"></span>] <i class="wi wi-celsius"></i></span>
+				</div>
+				<div>
+					<span style="width: 40px; display: inline-block; text-align: center"><i class="wi wi-barometer"></i></span>
+					<span><span id="weather_pressure"></span> hPa</span>
+				</div>
+				<div>
+					<span style="width: 40px; display: inline-block; text-align: center"><i class="wi wi-humidity"></i></span>
+					<span><span id="weather_humidity"></span> %</span>
+				</div>
+			</div>
+		</div>
+
+		<div id="calendar_outlook" class="notloaded region bottom left small">
+			<div class="container" id="calendar_outlook_events"></div>
+		</div>
+
+		<div id="calendar_google" class="notloaded region bottom right small">
+			<div id="authorize-div" style="display: none">
+				<span>Authorize access to Google Calendar API</span>
+				<!--Button for the user to click to initiate auth sequence -->
+				<button id="authorize-button" onclick="handleAuthClick(event)">Authorize</button>
+			</div>
+			<div class="container" id="calendar_google_events"></div>
+		</div>
+	</body>
+</html>
