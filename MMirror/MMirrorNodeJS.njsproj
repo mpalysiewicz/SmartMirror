@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a5d4e1e7-f292-4fd3-b9a5-29a19e4a5388}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -112,13 +112,35 @@
     <Folder Include="routes" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\body-parser\" />
+    <Folder Include="typings\globals\bson\" />
+    <Folder Include="typings\globals\express-handlebars\" />
+    <Folder Include="typings\globals\express-session\" />
+    <Folder Include="typings\globals\express\" />
+    <Folder Include="typings\globals\formidable\" />
+    <Folder Include="typings\globals\handlebars\" />
+    <Folder Include="typings\globals\lodash\" />
+    <Folder Include="typings\globals\mongoose\" />
+    <Folder Include="typings\globals\nconf\" />
     <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\globals\request\" />
     <Folder Include="views" />
     <Folder Include="views\layouts" />
     <Folder Include="views\partials" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\body-parser\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\bson\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\express-handlebars\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\express-session\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\formidable\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\handlebars\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\lodash\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\nconf\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\request\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
