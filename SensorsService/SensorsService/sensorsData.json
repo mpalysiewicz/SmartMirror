@@ -1,0 +1,47 @@
+{
+  "room1_temp": {
+    "name": "Room 1 Temerature",
+    "id": "room1_temp",
+    "data": [
+        {
+          "measurement_time": "2016-09-08 20:06:15",
+          "value": "22,2",
+          "unit": "C"
+        },
+        {
+          "measurement_time": "2016-09-08 20:07:15",
+          "value": "22,3",
+          "unit": "C"
+        }
+      ]    
+  },
+
+  "room1_hum" : {
+    "name": "Room 1 Humidity",
+    "id": "room1_hum",
+    "data": [
+      {
+        "value": "44,8",
+        "unit": "%",
+        "measurement_time": "2016-09-08 20:06:15"
+      },
+      {
+        "value": "44,7",
+        "unit": "%",
+        "measurement_time": "2016-09-08 20:07:15"
+      }
+    ]
+  },
+	
+  "room2_temp": {
+    "name": "Room 2 Temerature",
+    "id": "room2_temp",
+    "data": [
+        {
+          "measurement_time": "2016-09-08 20:08:22",
+          "value": "26",
+          "unit": "C"
+        }
+      ]    
+  }
+}

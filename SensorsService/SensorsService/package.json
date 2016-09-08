@@ -1,0 +1,12 @@
+{
+  "name": "sensors-service",
+  "version": "0.0.0",
+  "description": "SensorsService",
+  "main": "server.js",
+  "author": {
+    "name": "Grzegorz"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
