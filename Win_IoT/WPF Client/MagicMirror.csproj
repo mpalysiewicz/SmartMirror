@@ -105,6 +105,7 @@
     <Compile Include="Controls\LED.xaml.cs">
       <DependentUpon>LED.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SensorsDataSender.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

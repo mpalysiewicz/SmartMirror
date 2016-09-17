@@ -35,7 +35,14 @@ namespace ABB.MagicMirror
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                distanceTbx.Text = _distanceSensor.Read();
+                var distanceReading = _distanceSensor.Read();
+                if(distanceReading == null)
+                {
+                    return;
+                }
+
+                distanceTbx.Text = distanceReading.DistanceInCm.ToString();
+                SensorsDataSender.SendObjectAsJson(distanceReading);
             });
         }
         

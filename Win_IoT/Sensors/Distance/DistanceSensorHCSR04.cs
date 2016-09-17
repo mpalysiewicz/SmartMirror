@@ -94,16 +94,16 @@ namespace ABB.Sensors.Distance
             return GetTimeUntilNextEdge(EchoPin, GpioPinValue.High, 100);
         }
 
-        public string Read()
+        public DistanceReading Read()
         {
             if (!IsInitialized)
             {
-                return string.Empty;
+                return null;
             }
 
             var lengthOfHighPulse = GetLengthOfHighPulse();
 
-            return Math.Round(17150 * lengthOfHighPulse, 2).ToString();
+            return new DistanceReading(Math.Round(17150 * lengthOfHighPulse, 2));
         }
     }
 }

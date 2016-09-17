@@ -28,6 +28,7 @@ namespace ABB.MagicMirror.GuiComponents
             {
                 TemperatureValue.Text = e.Temperature + "°C";
                 HumidiyValue.Text = e.Humidity + "%";
+                SensorsDataSender.SendObjectAsJson(e);
             });
         }
     }

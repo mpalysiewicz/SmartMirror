@@ -1,5 +1,6 @@
-﻿namespace ABB.Sensors.TemperatureWrapper
-{
+﻿
+namespace ABB.Sensors.TemperatureWrapper
+{    
     public sealed class TemperatureReadingArgs
     {
         public double Temperature { get; set; }
