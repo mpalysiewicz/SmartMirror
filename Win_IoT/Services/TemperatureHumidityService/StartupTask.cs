@@ -14,9 +14,9 @@ namespace Abb.Services.Temperature
     public sealed class StartupTask : IBackgroundTask
     {
         private TemperatureHumidityReader temperatureReader;
-        private const string Url = @"111";
+        private const string Url = @"http://10.3.54.74:8082/";
 
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
             // 
             // TODO: Insert code to perform background work
@@ -24,11 +24,18 @@ namespace Abb.Services.Temperature
             // If you start any asynchronous methods here, prevent the task
             // from closing prematurely by using BackgroundTaskDeferral as
             // described in http://aka.ms/backgroundtaskdeferral
-            //
+            // 
+            taskInstance.GetDeferral();           
             InitializeDataReader();
+            taskInstance.Canceled += TaskInstance_Canceled;
         }
 
-        private void InitializeDataReader()
+        private void TaskInstance_Canceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void InitializeDataReader()
         {
             temperatureReader = new TemperatureHumidityReader(Url);
         }

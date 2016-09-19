@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace ABB.MagicMirror
 {
-    public static class SensorsDataSender
+    public static class SensorServiceWrapper
     {
         private const string url = @"http://192.168.7.131:3000";
-        public static async void SendObjectAsJson(object objectToSend)
+        
+        public async static Task<JObject> DownloadLatestMeasurementById(string id)
         {
-            if (objectToSend == null)
-            {
-                return;
-            }
             try
             {
                 using (var httpClient = GetClient())
                 {
-                    var json = JsonConvert.SerializeObject(objectToSend);
+                    var response = httpClient.GetAsync(string.Format("/lastValue/{0}", id)).Result;
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
 
-                    var response = await httpClient.PostAsync("/", new StringContent(json, Encoding.UTF8, "application/json"));
+                    return JObject.Parse(responseBody);
                 }
             }
             catch (Exception e)
             {
 
-            }
+                return null;
+            }            
         }
 
         private static HttpClient GetClient()

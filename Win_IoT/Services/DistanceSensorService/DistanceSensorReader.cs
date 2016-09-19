@@ -20,7 +20,7 @@ namespace DistanceSensorService
             _distanceSensor = new DistanceSensorHCSR04();
             _distanceSensor.InitGPIO();
 
-            InitTimer(100);
+            InitTimer(3000);
         }
 
         private void InitTimer(int readRate)
@@ -38,6 +38,7 @@ namespace DistanceSensorService
             sensorDataSender.SendObjectAsJson(new SensorReading
             {
                 name = "Distance sensor 1",
+                id = "room1_dist",
                 data = new List<Measurement>
                 {
                     new Measurement
