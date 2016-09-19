@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var mongoClient = mongodb.MongoClient;
-//var url = 'mongodb://localhost:27017/sensors';
-var url = 'mongodb://10.3.54.74:27017/sensors';
+var url = 'mongodb://localhost:27017/sensors';
+//var url = 'mongodb://10.3.54.74:27017/sensors';
 var mdb;
 
 mongoClient.connect(url, function (err, db) {
@@ -109,13 +109,12 @@ function readAllSensorsData(callback) {
                 var sensors = [];
                 for(var i in items)
                 {
-                    if(items[i].collectionName.substring(3) == 'sys')
+                    if(items[i].collectionName.length >= 6 && items[i].collectionName.substring(0, 6) === 'system')
                         continue;
                     sensors.push(items[i].collectionName)
                 }
-                readAllSensorsDataRecursively(sensors, 0, [], function(status, allData) {
-                    console.log(allData);
-                    callback(true, allData);
+                readAllSensorsDataRecursively(sensors, 0, [], function(status, alldata) {
+                    callback(true, alldata);
                 })
             }
         });
