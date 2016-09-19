@@ -25,14 +25,14 @@ app.get('/lastValue', function (req, res) {
 })
 
 //GET a specific sensor all data
-app.get('/:id', function (req, res) {    
-    fs.readFile(__dirname + "/" + "sensorsData.json", 'utf8', function (err, data) {
-        sensorsData = JSON.parse(data);
-        var result = sensorsData[req.params.id]        
-        console.log(result);
-        res.end(JSON.stringify(result));
-    });
-})
+//app.get('/:id', function (req, res) {    
+//    fs.readFile(__dirname + "/" + "sensorsData.json", 'utf8', function (err, data) {
+//        sensorsData = JSON.parse(data);
+//        var result = sensorsData[req.params.id]        
+//        console.log(result);
+//        res.end(JSON.stringify(result));
+//    });
+//})
 
 app.post('/save', function (req, res) {
     console.log(req.body);
