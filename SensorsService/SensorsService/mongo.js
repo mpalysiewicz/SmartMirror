@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var mongoClient = mongodb.MongoClient;
-var url = 'mongodb://localhost:27017/sensors';
-//var url = 'mongodb://10.3.54.74:27017/sensors';
+//var url = 'mongodb://localhost:27017/sensors';
+var url = 'mongodb://10.3.54.74:27017/sensors';
 var mdb;
 
 mongoClient.connect(url, function (err, db) {
@@ -14,36 +14,37 @@ mongoClient.connect(url, function (err, db) {
     }
 });
 
-module.exports = {
+function addMeasurement(data, callback) {
+    if (mdb === undefined) {
+        console.log('Error: mongoDB is not accessible.');
+        callback(false, 'Error: mongoDB is not accessible.');
+    } else {
+        var collection = mdb.collection(data.id);    
+        collection.insert([data], function (err, result) {
+            if (err) {
+                console.log('Unable to insert document. Error: ', err);
+                callback(false, 'Unable to insert document. Error: ' + err);
+            } else {
+                console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
+                callback(true);
+            }
+        });
+    }
+};
 
-    addMeasurement: function (data, callback) {
-        if (mdb === undefined) {
-            console.log('Error: mongoDB is not accessible.');
-            callback(false, 'Error: mongoDB is not accessible.');
-        } else {
-            var collection = mdb.collection(data.id);    
-            collection.insert([data], function (err, result) {
-                if (err) {
-                    console.log('Unable to insert document. Error: ', err);
-                    callback(false, 'Unable to insert document. Error: ' + err);
-                } else {
-                    console.log('Inserted %d documents into the "users" collection. The documents inserted with "_id" are:', result.length, result);
-                    callback(true);
-                }
-            });
-        }
-    },
-
-    readSensorData: function (sensorId, callback) {
-        if (mdb === undefined) {
-            console.log('Error: mongoDB is not accessible.');
-            callback(false, 'Error: mongoDB is not accessible.');
-        } else {
-            var collection = mdb.collection(sensorId);    
-            var data = collection.find().sort({"data.measurement_time": 1}).toArray(function (err, result) {
-                if (err) {
-                    console.log('Unable to read collection. Error: ', err);
-                    callback(false, 'Unable to read collection. Error: ' + err);
+function readSensorData(sensorId, callback) {
+    if (mdb === undefined) {
+        console.log('Error: mongoDB is not accessible.');
+        callback(false, 'Error: mongoDB is not accessible.');
+    } else {
+        var collection = mdb.collection(sensorId);    
+        var data = collection.find().sort({"data.measurement_time": 1}).toArray(function (err, result) {
+            if (err) {
+                console.log('Unable to read collection. Error: ', err);
+                callback(false, 'Unable to read collection. Error: ' + err);
+            } else {
+                if(result == null || result.length == 0) {
+                    callback(true, {});
                 } else {
                     var data = {
                         id: result[0].id,
@@ -56,59 +57,74 @@ module.exports = {
                     console.log(data);
                     callback(true, data);
                 }
-            });
-        }
-    },
-
-    readLastSensorData: function (sensorId, callback) {
-        if (mdb === undefined) {
-            console.log('Error: mongoDB is not accessible.');
-            callback(false, 'Error: mongoDB is not accessible.');
-        } else {
-            console.log(sensorId);
-            var collection = mdb.collection(sensorId);    
-            var data = collection.find().sort({"data.measurement_time": -1}).nextObject(function (err, result) {
-                if (err) {
-                    console.log('Unable to read collection. Error: ', err);
-                    callback(false, 'Unable to read collection. Error: ' + err);
-                } else {
-                    console.log(result);
-                    callback(true, result);
-                }
-            });
-        }
-    },
-    
-    readAllSensorsData: function (callback) {
-        if (mdb === undefined) {
-            console.log('Error: mongoDB is not accessible.');
-            callback(false, 'Error: mongoDB is not accessible.');
-        } else {
-            var alldata = {};
-
-            mdb.collections(function (err, items) {
-                if (err) {
-                    console.log('Unable to read database. Error: ', err);
-                    callback(false, 'Unable to read database. Error: ' + err);
-                } else {
-                    callback(true, JSON.stringify(items, censor(items)));
-                }
-            });
-
-            /*db.getCollectionNames().forEach(function(element) {
-                var data = collection.find().toArray(function (err, result) {
-                    if (err) {
-                        console.log('Unable to insert document. Error: ', err);
-                        callback(false, 'Unable to insert document. Error: ' + err);
-                    } else {
-
-                    }
-                });
-            }, this);*/
-
-            console.log(alldata);
-            callback(true, alldata);
-        }
+            }
+        });
     }
+};
 
+function readLastSensorData(sensorId, callback) {
+    if (mdb === undefined) {
+        console.log('Error: mongoDB is not accessible.');
+        callback(false, 'Error: mongoDB is not accessible.');
+    } else {
+        console.log(sensorId);
+        var collection = mdb.collection(sensorId);    
+        var data = collection.find().sort({"data.measurement_time": -1}).nextObject(function (err, result) {
+            if (err) {
+                console.log('Unable to read collection. Error: ', err);
+                callback(false, 'Unable to read collection. Error: ' + err);
+            } else {
+                console.log(result);
+                if(result == null)
+                    callback(true, {});
+                else
+                    callback(true, result);
+            }
+        });
+    }
+};
+
+function readAllSensorsDataRecursively(sensors, sensorIndex, allData, callback) {
+    if(sensors.length == sensorIndex)
+    {
+        callback(true, allData);
+    } else {
+        readSensorData(sensors[sensorIndex], function(status, sensorData){
+            allData.push(sensorData);
+            readAllSensorsDataRecursively(sensors, sensorIndex+1, allData, callback);
+        })
+    }
+}
+    
+function readAllSensorsData(callback) {
+    if (mdb === undefined) {
+        console.log('Error: mongoDB is not accessible.');
+        callback(false, 'Error: mongoDB is not accessible.');
+    } else {
+        mdb.collections(function (err, items) {
+            if (err) {
+                console.log('Unable to read database. Error: ', err);
+                callback(false, 'Unable to read database. Error: ' + err);
+            } else {
+                var sensors = [];
+                for(var i in items)
+                {
+                    if(items[i].collectionName.substring(3) == 'sys')
+                        continue;
+                    sensors.push(items[i].collectionName)
+                }
+                readAllSensorsDataRecursively(sensors, 0, [], function(status, allData) {
+                    console.log(allData);
+                    callback(true, allData);
+                })
+            }
+        });
+    }
+};
+
+module.exports = {
+    addMeasurement: addMeasurement,
+    readSensorData: readSensorData,
+    readLastSensorData: readLastSensorData,
+    readAllSensorsData: readAllSensorsData
 };

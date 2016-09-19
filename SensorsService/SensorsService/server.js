@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 //GET all data
 app.get('/listSensorsData', function (req, res) {
-    mongo.readAllSensorsData(function(status, data) { res.send({status: status, data: data })});
+    mongo.readAllSensorsData(function(status, data) { res.send(data)});
     /*fs.readFile(__dirname + "/" + "sensorsData.json", 'utf8', function (err, data) {
         console.log(data);
         res.end(data);
