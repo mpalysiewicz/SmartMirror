@@ -44,6 +44,8 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -131,13 +133,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Abb.Sensors.ObjectModel\Abb.Sensors.ObjectModel.csproj">
-      <Project>{f373c711-5743-4d67-bdbd-4a29d5428047}</Project>
-      <Name>Abb.Sensors.ObjectModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SensorsDataForwarder\SensorDataForwarder.csproj">
       <Project>{924d308a-99c4-49ae-8385-749927598a43}</Project>
       <Name>SensorDataForwarder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sensors\Model\Abb.Sensors.ObjectModel\Abb.Sensors.ObjectModel.csproj">
+      <Project>{f373c711-5743-4d67-bdbd-4a29d5428047}</Project>
+      <Name>Abb.Sensors.ObjectModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Sensors\Temperature\ABB.Sensors.TemperatureWrapper\ABB.Sensors.TemperatureWrapper.csproj">
       <Project>{2e645a8b-fbfb-41de-b0ad-e38f7f8cc44c}</Project>

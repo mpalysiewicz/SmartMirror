@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Abb.Sensors.ObjectModel
+namespace ABB.Sensors.ObjectModel
 {
     public class Measurement
     {

@@ -1,4 +1,4 @@
-﻿using Abb.Sensors.ObjectModel;
+﻿using ABB.Sensors.ObjectModel;
 using ABB.Sensors.Distance;
 using SensorDataForwarder;
 using System;

@@ -7,8 +7,8 @@
     <ProjectGuid>{F373C711-5743-4D67-BDBD-4A29D5428047}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Abb.Sensors.ObjectModel</RootNamespace>
-    <AssemblyName>Abb.Sensors.ObjectModel</AssemblyName>
+    <RootNamespace>ABB.Sensors.ObjectModel</RootNamespace>
+    <AssemblyName>ABB.Sensors.ObjectModel</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
