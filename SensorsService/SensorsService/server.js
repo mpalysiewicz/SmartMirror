@@ -1,7 +1,8 @@
-﻿var express = require('express');
+﻿var mongo = require('./mongo');
+var express = require('express');
 var app = express();
 var fs = require("fs");
-var mongo = require('./mongo');
+var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
