@@ -1,6 +1,9 @@
 ﻿var express = require('express');
 var app = express();
 var fs = require("fs");
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 //GET all data
 app.get('/listSensorsData', function (req, res) {
@@ -30,6 +33,11 @@ app.get('/:id', function (req, res) {
         res.end(JSON.stringify(result));
     });
 })
+
+app.post('/save', function (req, res) {
+    console.log(req.body);
+    fs.appendFileSync(__dirname + "/" + "sensorsData.json", req.body, 'utf-8');
+});
 
 
 var server = app.listen(8081, function () {
