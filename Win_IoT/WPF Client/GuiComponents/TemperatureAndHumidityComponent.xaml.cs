@@ -1,35 +1,57 @@
-﻿using ABB.Sensors.TemperatureWrapper;
-using System;
+﻿using System;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Newtonsoft.Json.Linq;
 
 namespace ABB.MagicMirror.GuiComponents
 {
     public sealed partial class TemperatureAndHumidityComponent : UserControl
     {
-        private TemperatureSensor temperatureSensor;
+        public string Id { get; set; }
+        private DispatcherTimer timer;
 
         public TemperatureAndHumidityComponent()
-        {
+        {            
             this.InitializeComponent();
-            SetupTemperatureSensor();
+            InitializeTimer();
         }
-        
-        private void SetupTemperatureSensor()
+
+        private void InitializeTimer()
         {
-            temperatureSensor = new TemperatureSensor(10000);
-            if (temperatureSensor == null)
-                return;
-            temperatureSensor.TemperatureRead += TemperatureSensor_TemperatureRead;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
-        private async void TemperatureSensor_TemperatureRead(object sender, TemperatureReadingArgs e)
+
+        private async void Timer_Tick(object sender, object e)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                TemperatureValue.Text = e.Temperature + "°C";
-                HumidiyValue.Text = e.Humidity + "%";
-                SensorsDataSender.SendObjectAsJson(e);
+                UpdateTemperature();
             });
+        }
+
+        private async void UpdateTemperature()
+        {
+            try
+            {
+                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(Id);
+                JObject temperatureMeasurement = await temperatureMeasurementTask;
+                if (temperatureMeasurement == null)
+                {
+                    return;
+                }
+
+                TemperatureValue.Text = temperatureMeasurement["data"][0]["value"].ToString() + temperatureMeasurement["data"][0]["unit"].ToString();// "°C";
+                HumidiyValue.Text = temperatureMeasurement["data"][1]["value"].ToString() + temperatureMeasurement["data"][1]["unit"].ToString(); //temperatureMeasurement["Humidity"] + "%";
+
+            }
+            catch (Exception e)
+            {
+            }
+
         }
     }
 }
