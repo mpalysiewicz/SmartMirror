@@ -9,14 +9,27 @@
     mc:Ignorable="d" Height="1280" Width="1023">
 
     <Grid Background="Black">
-        <components:TemperatureAndHumidityComponent  Margin="30,40,165,555"/>
-
-        <components:MotionSensorComponent  Margin="30,130,0,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         
-        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:" />
-        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="100,250,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100"/>
+        <components:TemperatureAndHumidityComponent Grid.Row="0" Grid.Column="0"/>
+        
+        <components:MotionSensorComponent  Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"/>
 
-        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Right" Margin="0,40,275,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85"/>
-        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Right" Margin="0,40,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000"/>
+        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:"  Grid.Column="2"/>
+        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
+
+        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="3"/>
+        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="3"/>
+
+        <WebView Source="http://localhost:1276/mirror" Grid.Row="1" Grid.ColumnSpan="4" Width="Auto" Height="Auto"/>
     </Grid>
 </Page>
