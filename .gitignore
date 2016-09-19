@@ -1,2 +1,11 @@
-/SensorsService/SensorsService/node_modules
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
 *.suo
+**/bin
+**/obj
+**/.vs
+
+**/node_modules
+**/typings
