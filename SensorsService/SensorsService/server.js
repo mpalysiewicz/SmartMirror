@@ -36,7 +36,7 @@ app.get('/:id', function (req, res) {
 
 app.post('/save', function (req, res) {
     console.log(req.body);
-    fs.appendFileSync(__dirname + "/" + "sensorsData.json", req.body, 'utf-8');
+    fs.appendFileSync(__dirname + "/" + "sensorsData.json", JSON.stringify(req.body), 'utf-8');
 });
 
 
