@@ -6,7 +6,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="1280" Width="1023">
+    mc:Ignorable="d" Height="1080" Width="1920">
 
     <Grid Background="Black">
         <Grid.RowDefinitions>
@@ -30,6 +30,6 @@
         <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="3"/>
         <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="3"/>
 
-        <WebView Source="http://localhost:1276/mirror" Grid.Row="1" Grid.ColumnSpan="4" Width="Auto" Height="Auto"/>
+        <WebView x:Name="webView" Source="http://10.3.54.74:3000/mirror" Grid.Row="1" Grid.ColumnSpan="4" Width="500" Height="500"  />
     </Grid>
 </Page>

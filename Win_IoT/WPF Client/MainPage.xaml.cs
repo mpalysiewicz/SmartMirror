@@ -24,11 +24,18 @@ namespace ABB.MagicMirror
 
             _distanceSensor = new DistanceSensorHCSR04();
             _distanceSensor.InitGPIO();
+
+            webView.Loaded += WebView_Loaded;
         }
-                
+
+        private void WebView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ipAddressTbx.Text = "LOaded";
+        }
+
         private void ShowIpAddress()
         {
-            ipAddressTbx.Text = string.Join(",  ", Helpers.Networking.GetLocalIpAddress());
+            //ipAddressTbx.Text = string.Join(",  ", Helpers.Networking.GetLocalIpAddress());
         }
 
         private async void Timer_Tick(object sender, object e)
@@ -42,7 +49,7 @@ namespace ABB.MagicMirror
                 }
 
                 distanceTbx.Text = distanceReading.DistanceInCm.ToString();
-                SensorsDataSender.SendObjectAsJson(distanceReading);
+                //SensorServiceWrapper.SendObjectAsJson(distanceReading);
             });
         }
         

@@ -21,12 +21,13 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <uap:ApplicationContentUriRules>
-        <uap:Rule Match="http://localhost:1276/mirror" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="http://10.3.54.74:3000/mirror" Type="include" WindowsRuntimeAccess="all" />
       </uap:ApplicationContentUriRules>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer" />
     <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>
