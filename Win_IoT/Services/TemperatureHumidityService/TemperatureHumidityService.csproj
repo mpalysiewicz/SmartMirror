@@ -131,6 +131,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Abb.Sensors.ObjectModel\Abb.Sensors.ObjectModel.csproj">
+      <Project>{f373c711-5743-4d67-bdbd-4a29d5428047}</Project>
+      <Name>Abb.Sensors.ObjectModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SensorsDataForwarder\SensorDataForwarder.csproj">
       <Project>{924d308a-99c4-49ae-8385-749927598a43}</Project>
       <Name>SensorDataForwarder</Name>

@@ -1,5 +1,8 @@
-﻿using ABB.Sensors.Distance;
+﻿using Abb.Sensors.ObjectModel;
+using ABB.Sensors.Distance;
 using SensorDataForwarder;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace DistanceSensorService
@@ -20,8 +23,6 @@ namespace DistanceSensorService
             InitTimer(100);
         }
 
-
-
         private void InitTimer(int readRate)
         {
             timer = new Timer(ReadDistance, null, 0, readRate);
@@ -34,7 +35,19 @@ namespace DistanceSensorService
             {
                 return;
             }
-            sensorDataSender.SendObjectAsJson(distanceReading);
+            sensorDataSender.SendObjectAsJson(new SensorReading
+            {
+                name = "Distance sensor 1",
+                data = new List<Measurement>
+                {
+                    new Measurement
+                    {
+                        measurement_time = DateTime.Now,
+                        value = distanceReading.DistanceInCm.ToString(),
+                        unit = "cm",
+                    }
+                }
+            });
         }
     }
 }

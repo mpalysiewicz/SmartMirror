@@ -25,7 +25,7 @@ namespace SensorDataForwarder
                 {
                     var json = JsonConvert.SerializeObject(objectToSend);
 
-                    var response = await httpClient.PostAsync("/", new StringContent(json, Encoding.UTF8, "application/json"));
+                    var response = await httpClient.PostAsync("/save", new StringContent(json, Encoding.UTF8, "application/json"));
                 }
             }
             catch (Exception e)

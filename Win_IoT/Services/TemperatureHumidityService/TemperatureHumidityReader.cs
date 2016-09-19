@@ -1,5 +1,8 @@
 ﻿using ABB.Sensors.TemperatureWrapper;
+using Abb.Sensors.ObjectModel;
 using SensorDataForwarder;
+using System;
+using System.Collections.Generic;
 
 namespace Abb.Services.Temperature
 {
@@ -23,7 +26,23 @@ namespace Abb.Services.Temperature
 
         private void TemperatureSensor_TemperatureRead(object sender, TemperatureReadingArgs e)
         {
-            sensorDataSender.SendObjectAsJson(e);
+            sensorDataSender.SendObjectAsJson(new SensorReading
+            {
+                name = "Temp sensor 1",
+                data = new List<Measurement>()
+                     {
+                        new Measurement {
+                         measurement_time = DateTime.Now,
+                         value = e.Temperature.ToString(),
+                         unit = "°C",
+                     },
+                        new Measurement {
+                         measurement_time = DateTime.Now,
+                         value = e.Humidity.ToString(),
+                         unit = "%",
+                     }
+                }
+            });
         }
     }
 }
