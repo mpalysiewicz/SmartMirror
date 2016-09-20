@@ -3,8 +3,8 @@ var request = require('request');
 request.post(
     'http://localhost:8082/save',
     { json: {
-        "name": "Room 3 Temerature",
-        "id": "room3_temp",
+        "name": "Room 2 Temerature",
+        "id": "room2_temp",
         "data": {
             "measurement_time": "2016-09-08 20:06:15",
             "value": "22,2",

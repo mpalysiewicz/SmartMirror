@@ -1,4 +1,5 @@
-﻿var mongo = require('./mongo');
+﻿var mongo = require('./publishers/mongo');
+var azure = require('./publishers/azureIotHub');
 var express = require('express');
 var app = express();
 var fs = require("fs");
@@ -22,7 +23,9 @@ app.get('/:id', function (req, res) {
 })
 
 app.post('/save', function (req, res) {
-    mongo.addMeasurement(req.body, function(status, message) { res.send({status: status, message: message })});
+    mongo.addMeasurement(req.body, function (status, message) { res.send({ status: status, message: message }) });
+    azure.publish(req.body, function (status, message) { res.send({ status: status, message: message })
+    });
 });
 
 var server = app.listen(8082, function () {
