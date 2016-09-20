@@ -14,6 +14,15 @@ namespace ABB.MagicMirror
             this.InitializeComponent();
 
             ShowIpAddress();
+
+            Room1Temp.SensorId = "room1_temp";            
+            Room1Hum.SensorId = "room1_hum";
+            Room1Dist.SensorId = "room1_dist";
+
+            Room2Temp.SensorId = "room2_temp";
+            Room2Hum.SensorId = "room2_hum";
+            Room2Dust.Title = "Room 2 dust";
+            Room2Dust.SensorId = "room2_dust";
         }
                 
         private void ShowIpAddress()

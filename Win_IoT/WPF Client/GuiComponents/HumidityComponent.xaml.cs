@@ -21,15 +21,15 @@ namespace ABB.MagicMirror.GuiComponents
 {
     public sealed partial class HumidityComponent : UserControl
     {
-        public string Id { get; set; }
         private DispatcherTimer timer;
-        private const string url = @"http://10.3.54.74:8082";
 
         public HumidityComponent()
         {
             this.InitializeComponent();
             InitializeTimer();
         }
+
+        public string SensorId { get; set; }
 
         private void InitializeTimer()
         {
@@ -51,7 +51,7 @@ namespace ABB.MagicMirror.GuiComponents
         {
             try
             {
-                var humidityMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(url, "room1_hum");
+                var humidityMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(SensorId);
                 JObject humidityMeasurement = await humidityMeasurementTask;
                 if (humidityMeasurement == null)
                 {

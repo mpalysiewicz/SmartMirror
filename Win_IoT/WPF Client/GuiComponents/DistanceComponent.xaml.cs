@@ -11,14 +11,15 @@ namespace ABB.MagicMirror.GuiComponents
     public sealed partial class DistanceComponent : UserControl
     {
         public string Id { get; set; }
-        private DispatcherTimer timer;
-        private const string url = @"http://10.3.54.74:8082";
+        private DispatcherTimer timer;       
 
         public DistanceComponent()
         {
             this.InitializeComponent();
             InitializeTimer();
         }
+
+        public string SensorId { get; set; }
 
         private void InitializeTimer()
         {
@@ -40,7 +41,7 @@ namespace ABB.MagicMirror.GuiComponents
         {
             try
             {
-                var distanceMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(url, "room1_dist");
+                var distanceMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(SensorId);
                 JObject distanceMeasurement = await distanceMeasurementTask;
                 if (distanceMeasurement == null)
                 {

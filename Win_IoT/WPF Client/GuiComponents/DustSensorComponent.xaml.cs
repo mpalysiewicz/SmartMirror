@@ -8,17 +8,20 @@ using Windows.UI.Xaml.Controls;
 
 namespace ABB.MagicMirror.GuiComponents
 {
-    public sealed partial class SecondRoomTemperatureComponent : UserControl
+    public sealed partial class DustSensorComponent : UserControl
     {
         public string Id { get; set; }
-        private DispatcherTimer timer;
-        private const string url = @"http://10.3.55.17:8080";
+        private DispatcherTimer timer;        
 
-        public SecondRoomTemperatureComponent()
+        public DustSensorComponent()
         {
             this.InitializeComponent();
             InitializeTimer();
         }
+
+        public string SensorId { get; set; }
+
+        public string Title { get { return this.TitleTextBox.Text; } set { this.TitleTextBox.Text = value; } }
 
         private void InitializeTimer()
         {
@@ -32,24 +35,25 @@ namespace ABB.MagicMirror.GuiComponents
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                UpdateTemperature();
+                UpdateValue();
             });
         }
 
-        private async void UpdateTemperature()
+        private async void UpdateValue()
         {
+            if (string.IsNullOrEmpty(SensorId))
+                return;
+
             try
             {
-                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(url, "room2_temp");
-                JObject temperatureMeasurement = await temperatureMeasurementTask;
-                if (temperatureMeasurement == null)
+                var measurement = SensorServiceWrapper.DownloadLatestMeasurementById(SensorId);
+                JObject receivedData = await measurement;
+                if (receivedData == null)
                 {
                     return;
                 }
 
-                Room2TemperatureValue.Text =
-                    temperatureMeasurement.First.Parent["data"]["value"].ToString()
-                    + temperatureMeasurement.First.Parent["data"]["unit"].ToString();
+                DustValue.Text = receivedData.First.Parent["data"]["value"].ToString() + receivedData.First.Parent["data"]["unit"].ToString();
 
             }
             catch (Exception e)
