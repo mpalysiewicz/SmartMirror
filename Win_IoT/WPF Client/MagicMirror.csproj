@@ -128,7 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\icon-dust.png" />
-    <Content Include="Assets\icon-dustance.jpg" />
+    <Content Include="Assets\icon-distance.jpg" />
     <Content Include="Assets\icon-humidity.png" />
     <Content Include="Assets\icon-temperature.png" />
     <Content Include="Properties\Default.rd.xml" />

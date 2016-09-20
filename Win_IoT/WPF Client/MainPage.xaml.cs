@@ -18,7 +18,6 @@ namespace ABB.MagicMirror
 
             Room2Temp.SensorId = "room2_temp";
             Room2Hum.SensorId = "room2_hum";
-            Room2Dust.Title = "Room 2 dust";
             Room2Dust.SensorId = "room2_dust";
         }
                 

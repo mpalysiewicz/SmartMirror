@@ -15,6 +15,6 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>        
         <Image Source="ms-appx:///Assets/icon-temperature.png" HorizontalAlignment="Left" Height="50" Width="50" Stretch="Fill"/>
-        <TextBlock Foreground="White" Grid.Column="1"  Name="TemperatureValue" TextAlignment="Center" FontSize="36" VerticalAlignment="Center">38,7°C</TextBlock>
+        <TextBlock Foreground="White" Grid.Column="1"  Name="Value" TextAlignment="Center" FontSize="36" VerticalAlignment="Center">-</TextBlock>
     </Grid>
 </UserControl>

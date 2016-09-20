@@ -4,8 +4,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace ABB.MagicMirror.GuiComponents
 {
     public sealed partial class DistanceComponent : UserControl
@@ -48,7 +46,7 @@ namespace ABB.MagicMirror.GuiComponents
                     return;
                 }
 
-                DistanceValue.Text = distanceMeasurement.First.Parent["data"]["value"].ToString() + distanceMeasurement.First.Parent["data"]["unit"].ToString();
+                Value.Text = distanceMeasurement.First.Parent["data"]["value"].ToString() + distanceMeasurement.First.Parent["data"]["unit"].ToString();
 
             }
             catch (Exception e)
