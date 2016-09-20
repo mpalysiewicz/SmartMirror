@@ -1,0 +1,12 @@
+{
+  "name": "domotic-data-publisher",
+  "version": "0.0.0",
+  "description": "DomoticDataPublisher",
+  "main": "app.js",
+  "author": {
+    "name": "grzeg"
+  },
+  "dependencies": {
+    "request": "^2.75.0"
+  }
+}
