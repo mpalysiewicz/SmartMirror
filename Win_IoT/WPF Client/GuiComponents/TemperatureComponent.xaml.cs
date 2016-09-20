@@ -45,7 +45,7 @@ namespace ABB.MagicMirror.GuiComponents
                     return;
                 }
 
-                TemperatureValue.Text =
+                Value.Text =
                     temperatureMeasurement.First.Parent["data"]["value"].ToString() 
                     + temperatureMeasurement.First.Parent["data"]["unit"].ToString();
 

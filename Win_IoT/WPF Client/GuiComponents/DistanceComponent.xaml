@@ -6,17 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="60"
+    d:DesignWidth="200">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Foreground="White" Grid.Row="0" Grid.Column="0" TextAlignment="Center">Distance</TextBlock>
-        <TextBlock Foreground="White" Grid.Row="1" Grid.Column="0" Name="DistanceValue" TextAlignment="Center" FontSize="36">-</TextBlock>
-       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="ms-appx:///Assets/icon-distance.jpg" HorizontalAlignment="Left" Height="50" Width="50" Stretch="Fill"/>
+        <TextBlock Foreground="White" Grid.Column="1"  Name="Value" TextAlignment="Center" FontSize="36" VerticalAlignment="Center">-</TextBlock>
     </Grid>
 </UserControl>

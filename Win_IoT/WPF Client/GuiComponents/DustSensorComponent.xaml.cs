@@ -4,13 +4,10 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace ABB.MagicMirror.GuiComponents
 {
     public sealed partial class DustSensorComponent : UserControl
-    {
-        public string Id { get; set; }
+    {        
         private DispatcherTimer timer;        
 
         public DustSensorComponent()
@@ -19,9 +16,7 @@ namespace ABB.MagicMirror.GuiComponents
             InitializeTimer();
         }
 
-        public string SensorId { get; set; }
-
-        public string Title { get { return this.TitleTextBox.Text; } set { this.TitleTextBox.Text = value; } }
+        public string SensorId { get; set; }        
 
         private void InitializeTimer()
         {
@@ -53,8 +48,7 @@ namespace ABB.MagicMirror.GuiComponents
                     return;
                 }
 
-                DustValue.Text = receivedData.First.Parent["data"]["value"].ToString() + receivedData.First.Parent["data"]["unit"].ToString();
-
+                Value.Text = receivedData.First.Parent["data"]["value"].ToString() + receivedData.First.Parent["data"]["unit"].ToString();
             }
             catch (Exception e)
             {
