@@ -11,15 +11,14 @@ namespace ABB.MagicMirror
 {
     public static class SensorServiceWrapper
     {
-        private const string url = @"http://192.168.7.131:3000";
         
-        public async static Task<JObject> DownloadLatestMeasurementById(string id)
+        public async static Task<JObject> DownloadLatestMeasurementById(string url, string id)
         {
             try
             {
-                using (var httpClient = GetClient())
+                using (var httpClient = GetClient(url))
                 {
-                    var response = httpClient.GetAsync(string.Format("/lastValue/{0}", id)).Result;
+                    var response = httpClient.GetAsync(string.Format("/{0}/lastValue", id)).Result;
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
 
@@ -33,7 +32,7 @@ namespace ABB.MagicMirror
             }            
         }
 
-        private static HttpClient GetClient()
+        private static HttpClient GetClient(string url)
         {
             var client = new HttpClient
             {
