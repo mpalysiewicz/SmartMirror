@@ -127,6 +127,10 @@
     <None Include="MagicMirror_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\icon-dust.png" />
+    <Content Include="Assets\icon-dustance.jpg" />
+    <Content Include="Assets\icon-humidity.png" />
+    <Content Include="Assets\icon-temperature.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

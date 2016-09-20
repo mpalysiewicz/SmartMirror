@@ -6,16 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="100"
-    d:DesignWidth="200">
+    d:DesignHeight="60"
+    d:DesignWidth="160">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Foreground="White" Grid.Row="0"  TextAlignment="Center">Temperature</TextBlock>
-        <TextBlock Foreground="White" Grid.Row="1"  Name="TemperatureValue" TextAlignment="Center" FontSize="36">-</TextBlock>
+    <Grid>                
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>        
+        <Image Source="ms-appx:///Assets/icon-temperature.png" HorizontalAlignment="Left" Height="50" Width="50" Stretch="Fill"/>
+        <TextBlock Foreground="White" Grid.Column="1"  Name="TemperatureValue" TextAlignment="Center" FontSize="36" VerticalAlignment="Center">38,7°C</TextBlock>
     </Grid>
 </UserControl>
