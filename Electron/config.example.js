@@ -119,7 +119,16 @@ var config = {
       key: "", // Your last.fm api key
       user: "", // Your last.fm username
       refreshInterval : 0.6 // Number of minutes between checks for playing track
-    }
+    },
+	//Config part
+	sensorService: {
+	  address: "192.168.0.51:8082/",
+	  sensors: [
+			{id: "room1_temp", name: "Room 1 Temperature"},
+			{id: "room1_hum", name: "Room 1 Humidity"},
+			{id: "room1_dist", name: "Room 1 Distance"}
+		]
+	}
 };
 
 // DO NOT REMOVE
