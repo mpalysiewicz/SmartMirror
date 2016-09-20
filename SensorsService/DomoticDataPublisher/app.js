@@ -1,5 +1,5 @@
 ﻿var request = require('request');
-var interval = 30000;
+var interval = 60000;
 
 
 function sleep(time) {
@@ -11,7 +11,7 @@ function ReadFromDomotic() {
     ReadAndPost(2, "room2_hum", "Room 2 humidity", "Humidity", "%");
     ReadAndPost(2, "room2_temp", "Room 2 temperature", "Temp", "°C");
     ReadAndPost(5, "room2_dust", "Room 2 dust", "Data", "ppm"); //"µg/m³"
-    sleep(interval).then(ReadFromDomotic());
+    setTimeout(function () { ReadFromDomotic() }, interval);
 }
 
 function ReadAndPost(domo_id, serv_id, name, property, unit) {
