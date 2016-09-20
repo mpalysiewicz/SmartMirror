@@ -10,7 +10,7 @@
     Height="1080"
     Width="1920"
     >
-    <!--<StackPanel>-->
+    <StackPanel>
     <Grid x:Name="Main"  Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <components:TemperatureComponent Grid.Row="0" Grid.Column="0" x:Name="Room1Temp"/>            
+            <components:TemperatureComponent Grid.Row="0" Grid.Column="0" x:Name="Room1Temp"/>
             <components:HumidityComponent Grid.Row="0" Grid.Column="1" Margin="30,0,0,0" x:Name="Room1Hum"/>
             <components:DistanceComponent Grid.Row="0" Grid.Column="2" Margin="30,0,0,0" x:Name="Room1Dist"/>
             <components:TemperatureComponent Grid.Row="0" Grid.Column="3" Margin="30,0,0,0" x:Name="Room2Temp"/>
@@ -46,12 +46,8 @@
 
         </Grid>
 
-        <!--<Grid>
-        <WebView Name="webView" Source="http://stackoverflow.com/" Width="Auto" Height="Auto" Grid.Column="1"/>
-    </Grid>-->
-
     </Grid>
-    
+        <WebView Name="webView" Source="http://10.3.54.74:3000/mirror" Width="1200" Height="800"/>
 
-    <!--</StackPanel>-->
+    </StackPanel>
 </Page>

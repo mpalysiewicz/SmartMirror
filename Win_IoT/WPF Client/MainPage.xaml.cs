@@ -6,9 +6,6 @@ namespace ABB.MagicMirror
 {
     public sealed partial class MainPage : Page
     {        
-        private DistanceSensorHCSR04 _distanceSensor;
-        private DispatcherTimer timer;
-
         public MainPage()
         {
             this.InitializeComponent();
