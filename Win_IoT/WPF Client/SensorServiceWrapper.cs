@@ -11,8 +11,9 @@ namespace ABB.MagicMirror
 {
     public static class SensorServiceWrapper
     {
-        
-        public async static Task<JObject> DownloadLatestMeasurementById(string url, string id)
+        private const string url = @"http://10.3.54.74:8082";
+
+        public async static Task<JObject> DownloadLatestMeasurementById(string id)
         {
             try
             {

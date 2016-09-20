@@ -34,11 +34,12 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <components:TemperatureComponent Grid.Row="0" Grid.Column="0"/>
-            <components:SecondRoomTemperatureComponent Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"/>
-            <components:HumidityComponent Grid.Row="0" Grid.Column="2" Margin="30,0,0,0"/>
-            <components:MotionSensorComponent  Grid.Row="0" Grid.Column="3" Margin="30,0,0,0"/>
-            <components:DistanceComponent Grid.Row="0" Grid.Column="4" Margin="30,0,0,0" />
+            <components:TemperatureComponent Grid.Row="0" Grid.Column="0" x:Name="Room1Temp"/>            
+            <components:HumidityComponent Grid.Row="0" Grid.Column="1" Margin="30,0,0,0" x:Name="Room1Hum"/>
+            <components:DistanceComponent Grid.Row="0" Grid.Column="2" Margin="30,0,0,0" x:Name="Room1Dist"/>
+            <components:TemperatureComponent Grid.Row="0" Grid.Column="3" Margin="30,0,0,0" x:Name="Room2Temp"/>
+            <components:HumidityComponent Grid.Row="0" Grid.Column="4" Margin="30,0,0,0" x:Name="Room2Hum"/>
+            <components:DustSensorComponent Grid.Row="0" Grid.Column="5" Margin="30,0,0,0" x:Name="Room2Dust"/>
 
             <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="5"/>
             <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="5"/>

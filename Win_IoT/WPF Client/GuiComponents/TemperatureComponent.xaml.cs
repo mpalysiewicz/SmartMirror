@@ -8,10 +8,10 @@ namespace ABB.MagicMirror.GuiComponents
 {
     public sealed partial class TemperatureComponent : UserControl
     {
-        public string Id { get; set; }
-        private DispatcherTimer timer;
-        private const string url = @"http://10.3.54.74:8082";
+        public string SensorId { get; set; }
 
+        private DispatcherTimer timer;
+      
         public TemperatureComponent()
         {            
             this.InitializeComponent();
@@ -38,7 +38,7 @@ namespace ABB.MagicMirror.GuiComponents
         {
             try
             {
-                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(url, "room1_temp");
+                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(SensorId);
                 JObject temperatureMeasurement = await temperatureMeasurementTask;
                 if (temperatureMeasurement == null)
                 {
