@@ -224,16 +224,16 @@
         </div>
       </div>
       <div class="bottom-right">
-          <ul class="">
-            <li ng-repeat="sensor in sensors">
-                <div>
-                    <span class="day">
-                      <span ng-bind="sensor.name"></span>
-                      <span ng-bind="sensor.data.value"></span>
-                      <span ng-bind="sensor.data.unit"></span>
-                    </span>
-                </div>
-            </li>
+         <ul class="sensors">
+        <li ng-repeat="sensor in sensors">
+        <div class="sensorList">
+            <span class="sensorName" ng-bind="sensor.name">Room 1 Temperature</span>
+            <div class="sensorvalue">
+                <span ng-bind="sensor.data.value">23</span>
+                <span ng-bind="sensor.data.unit">C</span>
+            </div>
+        </div>
+    </li>
         </ul>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
