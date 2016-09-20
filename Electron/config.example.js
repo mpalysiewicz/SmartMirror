@@ -122,11 +122,15 @@ var config = {
     },
 	//Config part
 	sensorService: {
-	  address: "192.168.0.51:8082/",
+	  address: "http://10.3.54.74:8082/",
 	  sensors: [
 			{id: "room1_temp", name: "Room 1 Temperature"},
 			{id: "room1_hum", name: "Room 1 Humidity"},
-			{id: "room1_dist", name: "Room 1 Distance"}
+			{id: "room1_dist", name: "Room 1 Distance"},
+			{id: "room2_temp", name: "Room 2 Temperature"},
+			{id: "room2_hum", name: "Room 2 Humidity"},
+			{id: "room2_dust", name: "Room 2 Dust"},
+            {id: "room2_pres", name: "Room 2 Pressure"},
 		]
 	}
 };
