@@ -2,27 +2,41 @@
 var interval = 30000;
 
 
-//5, 'Humidity', '%'
+function sleep(time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+}
 
 function ReadFromDomotic() {
     console.log("Reading from Domotic" + GetCurrentDateTime());
-    request.get('http://10.3.55.17:8080/json.htm?type=devices&rid=' + 4,            
-        function (error, response, body) {
-            var result = JSON.parse(body).result[0];
-            post("room2_hum", result.LastUpdate, result.Humidity, "%");   
-            console.log("Wait " + GetCurrentDateTime());        
-            sleep(30000).then(ReadFromDomotic());
-            
-        });            
+    ReadAndPost(2, "room2_hum", "Room 2 humidity", "Humidity", "%");
+    ReadAndPost(2, "room2_temp", "Room 2 temperature", "Temp", "°C");
+    ReadAndPost(5, "room2_dust", "Room 2 dust", "Data", "ppm"); //"µg/m³"
+    sleep(interval).then(ReadFromDomotic());
 }
 
-function post(id, timestamp, value, unit) {
-    //var timestamp = GetCurrentDateTime();
+function ReadAndPost(domo_id, serv_id, name, property, unit) {
+    request.get('http://10.3.55.17:8080/json.htm?type=devices&rid=' + domo_id,
+        function (error, response, body) {
+            var result = JSON.parse(body).result[0];
+            var value = parseValue(result[property],serv_id.split("_")[1]);
+            post(serv_id, name, result.LastUpdate, value, unit);           
+        });      
+}
+
+function parseValue(input, type) {
+    if (type == 'dust')
+        return input.split(" ")[0];
+    else
+        return input;
+}
+
+function post(id, name, timestamp, value, unit) {
+    console.log("Sending: " + id + " " + name + " " + timestamp + " " + value + unit);
     request.post(
         'http://10.3.54.74:8082/save',
         {
             json: {
-                "name": "Room 4 Temerature",
+                "name": name,
                 "id": id,
                 "data": {
                     "measurement_time": timestamp,
@@ -37,10 +51,6 @@ function post(id, timestamp, value, unit) {
             }
         }
     );
-}
-
-function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function GetCurrentDateTime() {
