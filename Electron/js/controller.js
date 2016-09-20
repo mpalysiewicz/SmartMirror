@@ -21,6 +21,7 @@
             StockService,
             ScrobblerService,
             FaceRecognitionService,
+			SensorService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
