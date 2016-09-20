@@ -42,6 +42,7 @@
     <script src="js/services/autosleep.js"></script>
     <script src="js/services/stock.js"></script>
     <script src="js/services/scrobbler.js"></script>
+    <script src="js/services/sensors.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -223,7 +224,17 @@
         </div>
       </div>
       <div class="bottom-right">
-        <!-- Someday something will live here -->
+          <ul class="">
+            <li ng-repeat="sensor in sensors">
+                <div>
+                    <span class="day">
+                      <span ng-bind="sensor.name"></span>
+                      <span ng-bind="sensor.data.value"></span>
+                      <span ng-bind="sensor.data.unit"></span>
+                    </span>
+                </div>
+            </li>
+        </ul>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>

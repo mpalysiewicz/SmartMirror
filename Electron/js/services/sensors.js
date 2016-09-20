@@ -1,22 +1,49 @@
-(function(){
+(function(annyang){
     'use strict';
-
-    function SensorService($http){
+	
+    function SensorsService($http, $q){
         var service = {};
-        service.sensorList = null;
+        service.sensorList = [];
+
+        function getSensorById(sensors, id) {
+            for (var i=0; i < sensors.length; i++){
+                
+                if(sensors[i].id == id){ 
+                    return config.sensorService.sensors[i];}
+            }
+            return null;
+        }
 
         service.init = function(){
-            for(var i=0; i<config.sensorService.sensors.length; i++){
-                service.sensorList[i] = getJsonData(config.sensorService.address, config.sensorService.sensors[i].id, config.sensorService.sensors[i].name);
-            }
+            var promises = [];
+            angular.forEach(config.sensorService.sensors, function(sensor) {
+                promises.push($http.get(config.sensorService.address+sensor.id+'/lastValue'));
+            });
+
+            return $q.all(promises).then(function(response) {
+                service.sensorList = [];
+                for (var i=0; i < response.length; i++){
+                    
+                    if(response[i].data.id !== undefined){
+                        response[i].data.name = getSensorById(config.sensorService.sensors, response[i].data.id).name;
+                        service.sensorList.push(response[i].data);
+                    }
+                }
+            });
         }
+
+        service.refreshSensors = function() {
+            return service.init().then(function(entries) {
+                return entries;
+            });
+        };
+
+        service.getSensorsData = function() {
+            return service.sensorList;
+        };
+
+		return service;
     }
-    function getJsonData(address,id,name){
-        var value;
-        $http.jsonp(address+id+'/lastValue').success(function(data) {
-            value = data[1]+data[2];
-        })
-        return value;
-    }
-    angular.module('SmartMirror').factory('SensorService',SensorService);
-})
+	
+    angular.module('SmartMirror').factory('SensorsService',SensorsService);
+}(window.annyang));
