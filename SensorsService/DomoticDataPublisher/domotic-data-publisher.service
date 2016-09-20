@@ -1,0 +1,15 @@
+[Unit]
+Description=Domotic Data Publisher
+Requires=sensors.service
+
+[Service]
+ExecStart=/usr/bin/node /var/domotic-data-publisher/server.js
+Restart=always
+#User=nobody
+#Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/domotic-data-publisher
+
+[Install]
+WantedBy=multi-user.target

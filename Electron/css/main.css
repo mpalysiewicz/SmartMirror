@@ -12,9 +12,11 @@
             -webkit-column-gap: 20px;
             column-count: 2;
             column-gap: 20px;
+            float: right;
         }
         .sensors li{
             list-style-type: none;
+            display: inline-block;
         }
         .sensorList{
             width: 20vh;
