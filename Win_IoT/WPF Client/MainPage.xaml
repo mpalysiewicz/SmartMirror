@@ -6,30 +6,51 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Height="1080" Width="1920">
-
-    <Grid Background="Black">
+    mc:Ignorable="d"
+    Height="1080"
+    Width="1920"
+    >
+    <!--<StackPanel>-->
+    <Grid x:Name="Main"  Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        
-        <components:TemperatureAndHumidityComponent Grid.Row="0" Grid.Column="0"/>
-        
-        <components:MotionSensorComponent  Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"/>
 
-        <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="Distance:"  Grid.Column="2"/>
-        <TextBlock x:Name="distanceTbx" Foreground="White" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
+        <Grid x:Name="Controls" Background="Black" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="3"/>
-        <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="3"/>
+            <components:TemperatureComponent Grid.Row="0" Grid.Column="0"/>
+            <components:SecondRoomTemperatureComponent Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"/>
+            <components:HumidityComponent Grid.Row="0" Grid.Column="2" Margin="30,0,0,0"/>
+            <components:MotionSensorComponent  Grid.Row="0" Grid.Column="3" Margin="30,0,0,0"/>
+            <components:DistanceComponent Grid.Row="0" Grid.Column="4" Margin="30,0,0,0" />
 
-        <WebView x:Name="webView" Source="http://10.3.54.74:3000/mirror" Grid.Row="1" Grid.ColumnSpan="4" Width="500" Height="500"  />
+            <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="5"/>
+            <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="5"/>
+
+        </Grid>
+
+        <!--<Grid>
+        <WebView Name="webView" Source="http://stackoverflow.com/" Width="Auto" Height="Auto" Grid.Column="1"/>
+    </Grid>-->
+
     </Grid>
+    
+
+    <!--</StackPanel>-->
 </Page>

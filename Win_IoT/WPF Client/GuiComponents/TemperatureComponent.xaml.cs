@@ -6,12 +6,13 @@ using Newtonsoft.Json.Linq;
 
 namespace ABB.MagicMirror.GuiComponents
 {
-    public sealed partial class TemperatureAndHumidityComponent : UserControl
+    public sealed partial class TemperatureComponent : UserControl
     {
         public string Id { get; set; }
         private DispatcherTimer timer;
+        private const string url = @"http://10.3.54.74:8082";
 
-        public TemperatureAndHumidityComponent()
+        public TemperatureComponent()
         {            
             this.InitializeComponent();
             InitializeTimer();
@@ -37,15 +38,16 @@ namespace ABB.MagicMirror.GuiComponents
         {
             try
             {
-                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(Id);
+                var temperatureMeasurementTask = SensorServiceWrapper.DownloadLatestMeasurementById(url, "room1_temp");
                 JObject temperatureMeasurement = await temperatureMeasurementTask;
                 if (temperatureMeasurement == null)
                 {
                     return;
                 }
 
-                TemperatureValue.Text = temperatureMeasurement["data"][0]["value"].ToString() + temperatureMeasurement["data"][0]["unit"].ToString();// "°C";
-                HumidiyValue.Text = temperatureMeasurement["data"][1]["value"].ToString() + temperatureMeasurement["data"][1]["unit"].ToString(); //temperatureMeasurement["Humidity"] + "%";
+                TemperatureValue.Text =
+                    temperatureMeasurement.First.Parent["data"]["value"].ToString() 
+                    + temperatureMeasurement.First.Parent["data"]["unit"].ToString();
 
             }
             catch (Exception e)

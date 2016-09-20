@@ -1,6 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Core;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using ABB.Sensors.Distance;
 
@@ -16,43 +14,11 @@ namespace ABB.MagicMirror
             this.InitializeComponent();
 
             ShowIpAddress();
-                                    
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(100);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-
-            _distanceSensor = new DistanceSensorHCSR04();
-            _distanceSensor.InitGPIO();
-
-            webView.Loaded += WebView_Loaded;
         }
-
-        private void WebView_Loaded(object sender, RoutedEventArgs e)
-        {
-            ipAddressTbx.Text = "LOaded";
-        }
-
+                
         private void ShowIpAddress()
         {
-            //ipAddressTbx.Text = string.Join(",  ", Helpers.Networking.GetLocalIpAddress());
-        }
-
-        private async void Timer_Tick(object sender, object e)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                var distanceReading = _distanceSensor.Read();
-                if(distanceReading == null)
-                {
-                    return;
-                }
-
-                distanceTbx.Text = distanceReading.DistanceInCm.ToString();
-                //SensorServiceWrapper.SendObjectAsJson(distanceReading);
-            });
-        }
-        
-       
+            ipAddressTbx.Text = string.Join(",  ", Helpers.Networking.GetLocalIpAddress());
+        }          
     }
 }
