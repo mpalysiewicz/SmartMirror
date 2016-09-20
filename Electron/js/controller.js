@@ -20,8 +20,8 @@
             RssService,
             StockService,
             ScrobblerService,
-            FaceRecognitionService,
-			SensorService,
+            //FaceRecognitionService,
+			SensorsService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -103,6 +103,17 @@
             //Initialize SoundCloud
             var playing = false, sound;
             SoundCloudService.init();
+
+            var refreshSensors = function() {
+                console.log ("Refreshing Sensors");
+                $scope.sensors = null;
+                SensorsService.refreshSensors().then(function() {
+                  $scope.sensors = SensorsService.getSensorsData();
+                  console.log($scope.sensors);
+                });
+            };
+
+            registerRefreshInterval(refreshSensors, 1);
 
             var refreshCalendar = function() {
                 CalendarService.getCalendarEvents().then(function(response) {
