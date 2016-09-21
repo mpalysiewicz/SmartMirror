@@ -1,4 +1,5 @@
 ﻿<Page
+
     x:Class="ABB.MagicMirror.MainPage"
     xmlns:local="using:ABB.MagicMirror.Controls" 
     xmlns:components ="using:ABB.MagicMirror.GuiComponents"
@@ -9,22 +10,17 @@
     mc:Ignorable="d"
     Height="1080"
     Width="1920"
-    >
-    <StackPanel>
-    <Grid x:Name="Main"  Background="Black">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
 
-        <Grid x:Name="Controls" Background="Black" Grid.Column="0">
+    >
+
+    <StackPanel>
+
+        <Grid x:Name="Controls" Background="Black">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -32,24 +28,25 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+
             </Grid.ColumnDefinitions>
+
             <TextBlock Grid.Row="0" Grid.Column="0" Foreground="White" VerticalAlignment="Center" Margin="30,0,0,20" FontSize="36" Grid.ColumnSpan="3">Room 1</TextBlock>
             <TextBlock Grid.Row="0" Grid.Column="3" Foreground="White" VerticalAlignment="Center" Margin="30,0,0,20" FontSize="36" Grid.ColumnSpan="3">Room 2</TextBlock>
-            <components:TemperatureComponent Grid.Row="1" Grid.Column="0" x:Name="Room1Temp"/>            
+            <components:TemperatureComponent Grid.Row="1" Grid.Column="0" x:Name="Room1Temp"/>
             <components:HumidityComponent Grid.Row="1" Grid.Column="1" Margin="30,0,0,0" x:Name="Room1Hum"/>
             <components:DistanceComponent Grid.Row="1" Grid.Column="2" Margin="30,0,0,0" x:Name="Room1Dist"/>
             <components:TemperatureComponent Grid.Row="1" Grid.Column="3" Margin="30,0,0,0" x:Name="Room2Temp"/>
             <components:HumidityComponent Grid.Row="1" Grid.Column="4" Margin="30,0,0,0" x:Name="Room2Hum"/>
             <components:DustSensorComponent Grid.Row="1" Grid.Column="5" Margin="30,0,0,0" x:Name="Room2Dust"/>
 
-            <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="6"/>
-            <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="6"/>
+
+            <TextBlock x:Name="ipAddressLbl" Foreground="White" HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Top" Width="85" Grid.Column="5"/>
+            <TextBlock x:Name="ipAddressTbx" HorizontalAlignment="Left" Margin="30,30,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="275" Foreground="#FFF50000" Grid.Column="5"/>
+
 
         </Grid>
-
-    </Grid>
-        <WebView Name="webView" Source="http://10.3.54.74:3000/mirror" Width="1200" Height="800"/>
-
+        <WebView Name="webView" Source="http://10.3.54.74:3000/mirror" Width="Auto" Height="Auto"  DefaultBackgroundColor="Gray" />
     </StackPanel>
+
 </Page>
