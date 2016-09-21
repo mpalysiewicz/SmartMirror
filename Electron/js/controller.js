@@ -124,7 +124,7 @@
                 });
             };
 
-            registerRefreshInterval(refreshSensors, 1);
+            registerRefreshInterval(refreshSensors, 1.0/60.0*10);
 
             var refreshCalendar = function() {
                 CalendarService.getCalendarEvents().then(function(response) {

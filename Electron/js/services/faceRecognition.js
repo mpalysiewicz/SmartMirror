@@ -75,7 +75,7 @@
                 if(response.data.length > 0)
                     getPerson(response.data[0].persistedFaceId, callback);
                 else
-                    callback("Not recognized")
+                    callback("I don't know you")
             }, function myError(response) {
                 console.log(response);
                 alert(JSON.stringify(response));
