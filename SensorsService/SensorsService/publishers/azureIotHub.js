@@ -1,6 +1,7 @@
-﻿var clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
+//var﻿ clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
+var clientFromConnectionString = require('azure-iot-device-http').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
-var Amqp = require('azure-iot-device-amqp').Amqp;
+//var Amqp = require('azure-iot-device-amqp').Amqp;
 
 var connectionStrings = [
     'HostName=MagicMirror.azure-devices.net;DeviceId=room2_hum;SharedAccessKey=9q5FR9Y3JXxirIYXPyWJ6Sa7YOWk0BMb7xvjT25dHwQ=',
@@ -15,14 +16,21 @@ function publish(sensordata, callback) {
 
     for (var i = 0; i < connectionStrings.length; i++) {
         if (connectionStrings[i].indexOf(sensordata.id) !== -1) {
-            client = clientFromConnectionString(connectionStrings[i], Amqp);
+            client = clientFromConnectionString(connectionStrings[i]);
             break;
         }
     }
 
-    currentdata = sensordata;
-    client.open(connectCallback);
-    
+    if(client == undefined) {
+        console.log('Unknown sensor: ', sensordata.id);
+        return;
+    }
+	else
+	{
+	console.log('Known sensor. Sending data: ', sensordata.id);
+    	currentdata = sensordata;
+    	client.open(connectCallback);
+    }
 }
 
 var connectCallback = function(err) {
@@ -47,7 +55,7 @@ var connectCallback = function(err) {
         });
 
         client.on('disconnect', function () {
-            clearInterval(sendInterval);
+            //clearInterval(sendInterval);
             client.removeAllListeners();
             client.connect(connectCallback);
         });

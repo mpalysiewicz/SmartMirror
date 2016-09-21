@@ -24,8 +24,7 @@ app.get('/:id', function (req, res) {
 
 app.post('/save', function (req, res) {
     mongo.addMeasurement(req.body, function (status, message) { res.send({ status: status, message: message }) });
-    azure.publish(req.body, function (status, message) { res.send({ status: status, message: message })
-    });
+    azure.publish(req.body, function (status, message) { res.send({ status: status, message: message }) });
 });
 
 var server = app.listen(8082, function () {
