@@ -117,7 +117,6 @@
 
             var refreshSensors = function() {
                 console.log ("Refreshing Sensors");
-                $scope.sensors = null;
                 SensorsService.refreshSensors().then(function() {
                   $scope.sensors = SensorsService.getSensorsData();
                   console.log($scope.sensors);
