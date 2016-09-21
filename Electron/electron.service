@@ -1,0 +1,16 @@
+[Unit]
+Description=Electron Mirror Service
+Requires=mongodb.service
+
+[Service]
+#ExecStart=/usr/bin/node /var/electron-service/server.js
+ExecStart=npm start
+Restart=always
+#User=nobody
+#Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/electron-mirror
+
+[Install]
+WantedBy=multi-user.target
