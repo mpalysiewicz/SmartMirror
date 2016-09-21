@@ -20,7 +20,7 @@
             RssService,
             StockService,
             ScrobblerService,
-            //FaceRecognitionService,
+            FaceRecognitionService,
 			SensorsService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
@@ -104,16 +104,28 @@
             var playing = false, sound;
             SoundCloudService.init();
 
+            //FaceRecognitionService.init();
+
+            var refreshFaceRecognition = function() {
+                console.log ("Refreshing Face Recognition");
+                FaceRecognitionService.takeSnapshot(function(faceId) {
+                    $scope.faceId = faceId;
+                });
+            };
+
+            registerRefreshInterval(refreshFaceRecognition, 1.0/60.0*10);
+
             var refreshSensors = function() {
                 console.log ("Refreshing Sensors");
-                $scope.sensors = null;
                 SensorsService.refreshSensors().then(function() {
-                  $scope.sensors = SensorsService.getSensorsData();
+                  var sensors = SensorsService.getSensorsData();
+                  if(sensors.length > 0)
+                    $scope.sensors = sensors;
                   console.log($scope.sensors);
                 });
             };
 
-            registerRefreshInterval(refreshSensors, 1);
+            registerRefreshInterval(refreshSensors, 1.0/60.0*10);
 
             var refreshCalendar = function() {
                 CalendarService.getCalendarEvents().then(function(response) {

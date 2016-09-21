@@ -43,6 +43,7 @@
     <script src="js/services/stock.js"></script>
     <script src="js/services/scrobbler.js"></script>
     <script src="js/services/sensors.js"></script>
+    <script src="js/services/faceRecognition.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -55,6 +56,10 @@
 
   </head>
   <body ng-controller="MirrorCtrl" ng-cloak="">
+
+	<video style="display: none" id="video" width="640" height="480" autoplay></video>
+	<canvas style="display: none" id="canvas" width="640" height="480"></canvas>
+
     <div class="top">
       <div class="top-left">
         <div class="date grey"><span ng-bind="date.format('dddd')"></span>, <span ng-bind="date.format('LL')"></span></div>
@@ -120,6 +125,7 @@
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
         <h1 ng-bind="greeting"></h1>
+        <h2 ng-bind="faceId"></h2>
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
