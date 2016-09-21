@@ -47,10 +47,59 @@
                     "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
                 }
             }).then(function mySucces(response) {
-                callback(response.data[0].faceId)
-                service.faceId = response.data[0].faceId;
-                console.log(JSON.stringify(response));
+                console.log(response);
+                if(response.data.length > 0)
+                    identifyPersons(response.data[0].faceId, callback);
+                else
+                    callback("Show your face")
             }, function myError(response) {
+                console.log(response);
+                alert(JSON.stringify(response));
+            });
+        };
+
+        function identifyPersons(faceId, callback) {
+            $http({
+                url: 'https://api.projectoxford.ai/face/v1.0/findsimilars',
+                method: 'post',
+                data: { 
+                    faceListId: "electron-mirror",
+                    faceId: faceId
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                if(response.data.length > 0)
+                    getPerson(response.data[0].persistedFaceId, callback);
+                else
+                    callback("Not recognized")
+            }, function myError(response) {
+                console.log(response);
+                alert(JSON.stringify(response));
+            });
+        };
+
+        function getPerson(faceId, callback) {
+            $http({
+                url: 'https://api.projectoxford.ai/face/v1.0/facelists/electron-mirror',
+                headers: {
+                    "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                for(var i in response.data.persistedFaces) {
+                    console.log(response.data.persistedFaces[i].persistedFaceId, ' ',faceId)
+                    if(response.data.persistedFaces[i].persistedFaceId === faceId) {
+                        callback(response.data.persistedFaces[i].userData)
+                        break;
+                    }
+                }
+            }, function myError(response) {
+                console.log(response);
+                alert(JSON.stringify(response));
             });
         };
 
