@@ -54,7 +54,6 @@
                     callback("Show your face")
             }, function myError(response) {
                 console.log(response);
-                alert(JSON.stringify(response));
             });
         };
 
@@ -78,7 +77,6 @@
                     callback("I don't know you")
             }, function myError(response) {
                 console.log(response);
-                alert(JSON.stringify(response));
             });
         };
 
@@ -99,7 +97,6 @@
                 }
             }, function myError(response) {
                 console.log(response);
-                alert(JSON.stringify(response));
             });
         };
 
