@@ -20,6 +20,11 @@ function publish(sensordata, callback) {
         }
     }
 
+    if(client === undefined) {
+        console.log('Unknown sensor: ', sensordata.id);
+        return;
+    }
+
     currentdata = sensordata;
     client.open(connectCallback);
     

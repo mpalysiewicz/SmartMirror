@@ -4,15 +4,15 @@ var url = 'mongodb://localhost:27017/sensors';
 //var url = 'mongodb://10.3.54.74:27017/sensors';
 var mdb;
 
-//mongoClient.connect(url, function (err, db) {
-//    if (err) {
-//        console.log('Unable to connect to the mongoDB server. Error:', err);
-//        //res.send('Error: ', err)
-//    } else {
-//        mdb = db;
-//        //db.close()
-//    }
-//});
+mongoClient.connect(url, function (err, db) {
+    if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err);
+        //res.send('Error: ', err)
+    } else {
+        mdb = db;
+        //db.close()
+    }
+});
 
 function addMeasurement(data, callback) {
     if (mdb === undefined) {
