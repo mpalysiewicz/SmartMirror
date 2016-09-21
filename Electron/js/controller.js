@@ -20,7 +20,7 @@
             RssService,
             StockService,
             ScrobblerService,
-            //FaceRecognitionService,
+            FaceRecognitionService,
 			SensorsService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
@@ -103,6 +103,17 @@
             //Initialize SoundCloud
             var playing = false, sound;
             SoundCloudService.init();
+
+            //FaceRecognitionService.init();
+
+            var refreshFaceRecognition = function() {
+                console.log ("Refreshing Face Recognition");
+                FaceRecognitionService.takeSnapshot(function(faceId) {
+                    $scope.faceId = faceId;
+                });
+            };
+
+            registerRefreshInterval(refreshFaceRecognition, 1.0/60.0*10);
 
             var refreshSensors = function() {
                 console.log ("Refreshing Sensors");
