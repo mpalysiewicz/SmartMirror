@@ -108,7 +108,7 @@
 
             var refreshFaceRecognition = function() {
                 console.log ("Refreshing Face Recognition");
-                FaceRecognitionService.takeSnapshot(function(faceId) {
+                var aa = FaceRecognitionService.takeSnapshot().then(function(faceId) {
                     $scope.faceId = faceId;
                 });
             };
@@ -553,6 +553,13 @@
                 TimerService.start();
                 $scope.focus = "timer";
               }
+            });
+
+            //Add person
+            addCommand('add_person', function(name) {
+                FaceRecognitionService.addPerson(name).then(function(){
+                    alert('done');
+                });
             });
 
             var resetCommandTimeout;

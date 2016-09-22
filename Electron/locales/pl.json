@@ -160,6 +160,11 @@
             "voice": "Wznów odliczanie",
             "description": "Wznawia odliczanie"
         },
+        "add_person": {
+            "text": "Dodaj osobę",
+            "voice": "Dodaj osobę",
+            "description": "Dodaje osobę"
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
