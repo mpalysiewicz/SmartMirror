@@ -44,7 +44,7 @@
                 processData: false,
                 headers: {
                     "Content-Type": "application/octet-stream",
-                    "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
                 }
             }).then(function mySucces(response) {
                 console.log(response);
@@ -62,12 +62,12 @@
                 url: 'https://api.projectoxford.ai/face/v1.0/findsimilars',
                 method: 'post',
                 data: { 
-                    faceListId: "electron-mirror",
+                    faceListId: config.faceRecognition.faceListId,
                     faceId: faceId
                 },
                 headers: {
                     "Content-Type": "application/json",
-                    "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
                 }
             }).then(function mySucces(response) {
                 console.log(response);
@@ -82,14 +82,13 @@
 
         function getPerson(faceId, callback) {
             $http({
-                url: 'https://api.projectoxford.ai/face/v1.0/facelists/electron-mirror',
+                url: 'https://api.projectoxford.ai/face/v1.0/facelists/' + config.faceRecognition.faceListId,
                 headers: {
-                    "Ocp-Apim-Subscription-Key": "5c122f3ebf724f20b145852c695c0ea1"
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
                 }
             }).then(function mySucces(response) {
                 console.log(response);
                 for(var i in response.data.persistedFaces) {
-                    console.log(response.data.persistedFaces[i].persistedFaceId, ' ',faceId)
                     if(response.data.persistedFaces[i].persistedFaceId === faceId) {
                         callback(response.data.persistedFaces[i].userData)
                         break;

@@ -132,7 +132,11 @@ var config = {
 			{id: "room2_dust", name: "Room 2 Dust"},
             {id: "room2_pres", name: "Room 2 Pressure"},
 		]
-	}
+	},
+    faceRecognition: {
+        apiKey: '',
+        faceListid: ''
+    }
 };
 
 // DO NOT REMOVE
