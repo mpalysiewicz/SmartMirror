@@ -1,11 +1,10 @@
 (function() {
     'use strict';
 
-    var Hyperion = require('hyperion-client');
 
     function LightService($http, $translate) {
         var service = {};
-
+        var SaidParameter = {};
         // update lights
         service.performUpdate = function(spokenWords){
             // split string into separate words and remove empty ones
@@ -13,13 +12,12 @@
    
             // what locations are defined in the config
             var definedLocations = [];
-            for(var i = 0; i < config.light.setup.length; i++){
-                definedLocations.push(config.light.setup[i].name.toLowerCase());
+            for(var i = 0; i < config.domoticz.groups.length; i++){
+                definedLocations.push(config.domoticz.groups[i].name.toLowerCase());
             }
 
-            var SaidParameter = {};
             SaidParameter['locations'] = [];
-            SaidParameter['on'] = true;
+            SaidParameter['on'] = "On";
 
             // what has been said
             for(var i = 0; i < spokenWords.length; i++){
@@ -30,35 +28,9 @@
 
                 // turn lights on or off?
                 if($translate.instant('lights.action.off') == spokenWords[i]){
-                    SaidParameter['on'] = false;
+                    SaidParameter['on'] = "Off";
                 }
 
-                // Choose Color
-                if($translate.instant('lights.colors.red') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [255, 0, 0];
-                    SaidParameter['colorHSV'] = [0, 255, 254];
-                } else if($translate.instant('lights.colors.green') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [0, 255, 0];
-                    SaidParameter['colorHSV'] = [25500, 255, 254];
-                } else if($translate.instant('lights.colors.blue') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [0, 0, 255];
-                    SaidParameter['colorHSV'] = [46920, 255, 254];
-                } else if($translate.instant('lights.colors.yellow') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [255, 255, 0];
-                    SaidParameter['colorHSV'] = [10920, 255, 254];
-                } else if($translate.instant('lights.colors.orange') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [255, 127, 0];
-                    SaidParameter['colorHSV'] = [5460, 255, 254];
-                } else if($translate.instant('lights.colors.pink') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [255, 0, 255];
-                    SaidParameter['colorHSV'] = [54610, 255, 254];
-                } else if($translate.instant('lights.colors.purple') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [127, 0, 127];
-                    SaidParameter['colorHSV'] = [54610, 255, 127];
-                } else if($translate.instant('lights.colors.white') == spokenWords[i]){
-                    SaidParameter['colorRGB'] = [255, 255, 255];
-                    SaidParameter['colorHSV'] = [0, 0, 254];
-                }
 
                 // Adjust brightness
                 if(spokenWords[i] == '100%' || $translate.instant('lights.intensity.max').includes(spokenWords[i])){
@@ -87,12 +59,6 @@
                     SaidParameter['brightness'] = 0.9;
                 }
 
-                // special mode
-                if($translate.instant('lights.action.nightmode').includes(spokenWords[i])){
-                    SaidParameter['colorRGB'] = [255, 0, 0];
-                    SaidParameter['colorHSV'] = [0, 255, 254];
-                    SaidParameter['brightness'] = 0.1
-                }
 
                 // reset all LED
                 if($translate.instant('lights.action.reset').includes(spokenWords[i])){
@@ -116,8 +82,6 @@
                 var SavedSetting = {};
                 // read settings from storage or use default
                 if(localStorage.getItem('Light_Setup_' + i) == null){
-                    SavedSetting['colorRGB'] = [255, 255, 255];
-                    SavedSetting['colorHSV'] = [0, 0, 254];
                     SavedSetting['brightness'] = 0.4
                 }
                 else{
@@ -144,53 +108,19 @@
 
         function updateLights(setting){
             var index = setting['location'];
-            for(var i = 0; i < config.light.setup[index].targets.length; i++){
-                if(config.light.setup[index].targets[i].type == "hyperion"){
-                    updateHyperion(i, index, setting);
-                }
-                else if(config.light.setup[index].targets[i].type == "hue"){
-                    updateHue(i, index, setting);
-                }
+            for(var i = 0; i < config.domoticz.groups[index].name.length; i++){
+                    updateDomoticz(i, index, setting);
             }
         }
 
-        function updateHyperion(i, index, setting){
-            // Convert color and brightness
-            for(var j = 0; j <  setting['colorRGB'].length; j++){
-                setting['colorRGB'][j] = Math.round(setting['colorRGB'][j] * setting['brightness']);
-            }
-            // Connect to the configured Hyperion client
-            var hyperion = new Hyperion(config.light.setup[index].targets[i].ip, config.light.setup[index].targets[i].port);
 
-            hyperion.on('connect', function(){
-                if(setting['on']){
-                    hyperion.setColor(setting['colorRGB']);
-                }
-                else{
-                    hyperion.clearall();
-                }
-            });
+        function updateDomoticz(i, index, setting){
 
-            hyperion.on('error', function(error){
-                console.error('error:', error);
-            });
-        }
-
-        function updateHue(i, index, setting){
-            var update = {};
-            update["transitiontime"] = 10;
-            
-            update['on'] = setting['on'];
-            if(setting['on']){
-                update['hue'] = setting['colorHSV'][0];
-                update['sat'] = setting['colorHSV'][1];
-                update['bri'] = Math.round(setting['colorHSV'][2] * setting['brightness']);
-            }
-
-            $http.put('http://' + config.light.settings.hueIp + '/api/' + config.light.settings.hueUsername + "/groups/" + config.light.setup[index].targets[i].id + "/action", update)
+            $http.put('http://' + config.domoticz.ip + '/json.htm?type=command&param=switchlight&idx=' + config.domoticz.groups[index].id + "&switchcmd=" + SaidParameter['on'] + "&level=0&passcode=")
             .success(function (data, status, headers) {
                 console.log(data);
             })
+            //http://192.168.1.7:8080/json.htm?type=command&param=switchlight&idx=61&switchcmd=On&level=0&passcode=
         }
 
         return service;
