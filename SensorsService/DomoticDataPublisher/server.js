@@ -1,6 +1,7 @@
 ﻿var request = require('request');
 var interval = 60000;
-
+var domoticUrl = 'http://192.168.0.54:8080';
+var sensorsServiceUrl = 'http://192.168.0.55';
 
 function sleep(time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -15,7 +16,7 @@ function ReadFromDomotic() {
 }
 
 function ReadAndPost(domo_id, serv_id, name, property, unit) {
-    request.get('http://10.3.55.17:8080/json.htm?type=devices&rid=' + domo_id,
+    request.get(domoticUrl+'/json.htm?type=devices&rid=' + domo_id,
         function (error, response, body) {
             var result = JSON.parse(body).result[0];
             var value = parseValue(result[property],serv_id.split("_")[1]);
@@ -33,7 +34,7 @@ function parseValue(input, type) {
 function post(id, name, timestamp, value, unit) {
     console.log("Sending: " + id + " " + name + " " + timestamp + " " + value + unit);
     request.post(
-        'http://10.3.54.74:8082/save',
+        sensorsServiceUrl + '/save',
         {
             json: {
                 "name": name,
