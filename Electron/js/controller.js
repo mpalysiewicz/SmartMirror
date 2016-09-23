@@ -571,6 +571,11 @@
                 });
             });
 
+            //Show camera
+            addCommand('show_camera', function() {
+                $scope.focus = "camera";
+            });
+
             var resetCommandTimeout;
             //Register callbacks for Annyang and the Keyword Spotter
             SpeechService.registerCallbacks({

@@ -179,6 +179,11 @@
             "voice": "Usuń mnie",
             "description": "Usuwa mnie"
         },
+        "show_camera": {
+            "text": "Pokaż kamerę",
+            "voice": "Pokaż kamerę",
+            "description": "Pokazuje kamerę"
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",

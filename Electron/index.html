@@ -56,10 +56,6 @@
 
   </head>
   <body ng-controller="MirrorCtrl" ng-cloak="">
-
-	<video style="display: none" id="video" width="640" height="480" autoplay></video>
-	<canvas style="display: none" id="canvas" width="640" height="480"></canvas>
-
     <div class="top">
       <div class="top-left">
         <div class="date grey"><span ng-bind="date.format('dddd')"></span>, <span ng-bind="date.format('LL')"></span></div>
@@ -126,6 +122,12 @@
       <div class="middle-center">
         <h1 ng-bind="greeting"></h1>
         <h2 ng-bind="faceId"></h2>
+	      
+        <div class="contents-box video-container animate-grow" ng-show="focus == 'camera'">
+          <video id="video" width="640" height="480" autoplay></video>
+	        <canvas style="display: none" id="canvas" width="640" height="480"></canvas>
+        </div>
+
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>

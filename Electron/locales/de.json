@@ -184,6 +184,11 @@
             "voice": "Remove me",
             "description": "Removes me"
         },
+        "show_camera": {
+            "text": "Show camera",
+            "voice": "Show camera",
+            "description": "Shows camera"
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
