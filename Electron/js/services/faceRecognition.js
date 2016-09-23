@@ -7,7 +7,6 @@
         service.isInitialized = false;
 
         service.init = function() {
-            console.log('!!! init');
             if(service.isInitialized) {
                 return new Promise(function(success, failure){
                     success();
@@ -30,16 +29,14 @@
         };
 
         service.takeSnapshot = function() {
-            this.init();
-            return this.init().then(takeSnapshot).then(recognizeFace);
+            return this.init().then(takeSnapshot).then(detectFace).then(findSimilarFace).then(findFaceInFaceList);
         };
 
         service.addPerson = function(name, callback) {
-            return this.init().then(takeSnapshot).then(function(snapshot) { return createPerson(snapshot) });
+            return this.init().then(takeSnapshot).then(function(snapshot) { return addFaceToFaceList(snapshot, name); });
         };
 
         function takeSnapshot(){
-            console.log('!!! captureSnapshot');
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
@@ -49,34 +46,39 @@
             });
         }
 
-        function recognizeFace(snapshot) {
+        function detectFace(snapshot) {
             return $http({
-                url: 'https://api.projectoxford.ai/face/v1.0/detect?returnFaceId=true',
+                url: 'https://api.projectoxford.ai/face/v1.0/detect',
                 method: 'post',
                 data: snapshot,
-                processData: false,
+                params: {
+                    returnFaceId: true
+                },
                 headers: {
                     "Content-Type": "application/octet-stream",
                     "Ocp-Apim-Subscription-Key": config.faceRecognition.key
                 }
             }).then(function mySucces(response) {
                 console.log(response);
-                if(response.data.length > 0)
-                    return identifyPersons(response.data[0].faceId);
-                else
-                    return "Show your face";
+                if(response.data.length == 0)
+                    return null;
+                return response.data[0].faceId;
             }, function myError(response) {
                 console.log(response);
             });
         };
 
-        function identifyPersons(faceId) {
+        function findSimilarFace(faceId) {
+            if(faceId === null)
+                return "Show your face";
+
             return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/findsimilars',
                 method: 'post',
                 data: { 
                     faceListId: config.faceRecognition.faceListId,
-                    faceId: faceId
+                    faceId: faceId,
+                    maxNumOfCandidatesReturned: 1
                 },
                 headers: {
                     "Content-Type": "application/json",
@@ -84,16 +86,18 @@
                 }
             }).then(function mySucces(response) {
                 console.log(response);
-                if(response.data.length > 0)
-                    return getPerson(response.data[0].persistedFaceId);
-                else
-                    return "I don't know you";
+                if(response.data.length == 0)
+                    return null
+                return response.data[0].persistedFaceId;
             }, function myError(response) {
                 console.log(response);
             });
         };
 
-        function getPerson(faceId) {
+        function findFaceInFaceList(faceId) {
+            if(faceId == null)
+                return "I don't know you";
+
             return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/facelists/' + config.faceRecognition.faceListId,
                 headers: {
@@ -112,25 +116,47 @@
             });
         };
 
-        function createPerson(snapshot, name) {
-            $http({
+        function addFaceToFaceList(snapshot, name) {
+            return $http({
+                url: 'https://api.projectoxford.ai/face/v1.0/facelists/'+config.faceRecognition.personGroupId+'/persistedFaces',
+                method: 'post',
+                data: snapshot,
+                params: {
+                    userData: name
+                },
+                headers: {
+                    "Content-Type": "application/octet-stream",
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+            }, function myError(response) {
+                console.log(response);
+            });
+        };
+
+        /*function createPerson(snapshot, name) {
+            return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/persongroups/'+config.faceRecognition.personGroupId+'/persons',
                 method: 'post',
-                data: {name: name, userData: 'test'},
+                data: {
+                    name: name
+                },
                 headers: {
                     "Content-Type": "application/json",
                     "Ocp-Apim-Subscription-Key": config.faceRecognition.key
                 }
             }).then(function mySucces(response) {
-                addPersonFace(snapshot, response.data.personId)
+                console.log(response);
+                return addPersonFace(snapshot, response.data.personId)
             }, function myError(response) {
                 console.log(response);
             });   
         }
 
         function addPersonFace(snapshot, personId) {
-            $http({
-                url: 'https://api.projectoxford.ai/face/v1.0/persongroups/{personGroupId}/persons/'+personId+'/persistedFaces',
+            return $http({
+                url: 'https://api.projectoxford.ai/face/v1.0/persongroups/'+config.faceRecognition.personGroupId+'/persons/'+personId+'/persistedFaces',
                 method: 'post',
                 data: snapshot,
                 headers: {
@@ -143,6 +169,27 @@
                 console.log(response);
             });
         };
+
+        function identifyPerson(faceId) {
+            return $http({
+                url: 'https://api.projectoxford.ai/face/v1.0/identify',
+                method: 'post',
+                data: {
+                    faceIds: [faceId],
+                    personGroupId: config.faceRecognition.personGroupId,
+                    maxNumOfCandidatesReturned: 1
+                },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                return 'aaa';
+            }, function myError(response) {
+                console.log(response);
+            });
+        };*/
 
         return service;
     }

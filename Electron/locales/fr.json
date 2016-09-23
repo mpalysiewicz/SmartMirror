@@ -160,6 +160,11 @@
             "voice": "Reprend (le) minuteur",
             "description": "Reprendre le timer."
         },
+        "add_person": {
+            "text": "Ajouter personne",
+            "voice": "Ajouter personne",
+            "description": "Ajoute personne."
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",

@@ -160,6 +160,11 @@
             "voice": "타이머 재시작",
             "description": "타이머 재시작."
         },
+        "add_person": {
+            "text": "사람을 추가합니다",
+            "voice": "사람을 추가합니다",
+            "description": "사람을 추가합니다."
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",

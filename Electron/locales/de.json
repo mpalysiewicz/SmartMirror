@@ -165,6 +165,11 @@
             "voice": "timer fortsetzen",
             "description": "Setzt den Timer fort."
         },
+        "add_person": {
+            "text": "Fügen Person",
+            "voice": "Fügen Person",
+            "description": "Fügt eine Person."
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",

@@ -104,11 +104,9 @@
             var playing = false, sound;
             SoundCloudService.init();
 
-            //FaceRecognitionService.init();
-
             var refreshFaceRecognition = function() {
                 console.log ("Refreshing Face Recognition");
-                var aa = FaceRecognitionService.takeSnapshot().then(function(faceId) {
+                FaceRecognitionService.takeSnapshot().then(function(faceId) {
                     $scope.faceId = faceId;
                 });
             };

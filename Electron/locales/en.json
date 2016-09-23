@@ -167,7 +167,7 @@
         },
         "add_person": {
             "text": "Add (the) person",
-            "voice": "add (the)  person",
+            "voice": "add (the) person",
             "description": "Adds the person."
         },
         "sc_play": {

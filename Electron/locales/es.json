@@ -160,6 +160,11 @@
             "voice": "continua (el) temporizador",
             "description": "Continua el temporizador."
         },
+        "add_person": {
+            "text": "Añadir persona",
+            "voice": "Añadir persona",
+            "description": "Añade persona."
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
