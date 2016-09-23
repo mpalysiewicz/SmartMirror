@@ -555,8 +555,19 @@
 
             //Add person
             addCommand('add_person', function(name) {
-                FaceRecognitionService.addPerson(name).then(function(){
-                    alert('done');
+                FaceRecognitionService.addPerson(name).then(function(faceId){
+                });
+            });
+
+            //Remove person
+            addCommand('remove_me', function(name) {
+                FaceRecognitionService.removePerson(name).then(function(){
+                });
+            });
+
+            //Remove Me
+            addCommand('remove_me', function() {
+                FaceRecognitionService.removeMe().then(function(){
                 });
             });
 

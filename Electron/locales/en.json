@@ -170,9 +170,19 @@
             "description": "Resume timer."
         },
         "add_person": {
-            "text": "Add (the) person",
-            "voice": "add (the) person",
+            "text": "Add (the) person ________",
+            "voice": "add (the) person *name",
             "description": "Adds the person."
+        },
+        "remove_person": {
+            "text": "Remove (the) person ________",
+            "voice": "Remove (the) person *name",
+            "description": "Removes person"
+        },
+        "remove_me": {
+            "text": "Remove me",
+            "voice": "Remove me",
+            "description": "Removes me"
         },
         "sc_play": {
             "text": "SoundCloud play ________",

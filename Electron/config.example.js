@@ -134,8 +134,8 @@ var config = {
 		]
 	},
     faceRecognition: {
-        apiKey: '',
-        faceListid: ''
+        key: '',
+        faceListId: '',
     }
 };
 
