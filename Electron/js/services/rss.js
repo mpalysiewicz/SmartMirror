@@ -14,7 +14,7 @@
             if (typeof config.rss != 'undefined'){
                 var promises = [];
                 angular.forEach(config.rss.feeds, function(url) {
-                    promises.push($http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK'));
+                    promises.push($http.jsonp('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK'));
                 });
 
                 return $q.all(promises).then(function(response) {
@@ -52,7 +52,7 @@
                     }
                     else {
                         service.currentFeed = service.currentFeed + 1;
-                    }               
+                    }
             };
             return service.feed[service.currentFeed];
         } ;
