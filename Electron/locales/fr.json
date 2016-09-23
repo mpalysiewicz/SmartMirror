@@ -38,6 +38,10 @@
             "off": "éteins"
         }
     },
+    "faceRecognition": {
+        "showyourface": "Show your face",
+        "idontknowyou": "I don't know you"
+    },
     "commands": {
         "title" : "Commandes disponibles",
         "list": {

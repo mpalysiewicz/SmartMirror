@@ -43,6 +43,10 @@
             "reset": "zurücksetzen"
         }
     },
+    "faceRecognition": {
+        "showyourface": "Show your face",
+        "idontknowyou": "I don't know you"
+    },
     "commands": {
         "title" : "Zur Verfügung stehende Befehle",
         "list": {

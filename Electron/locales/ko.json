@@ -38,6 +38,10 @@
             "off": "끄다"
         }
     },
+    "faceRecognition": {
+        "showyourface": "Show your face",
+        "idontknowyou": "I don't know you"
+    },
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {

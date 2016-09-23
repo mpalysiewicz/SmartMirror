@@ -38,6 +38,10 @@
             "off": "apagar"
         }
     },
+    "faceRecognition": {
+        "showyourface": "Show your face",
+        "idontknowyou": "I don't know you"
+    },
     "commands": {
         "title" : "Listado de Órdenes",
         "list": {

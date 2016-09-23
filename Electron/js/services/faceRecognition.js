@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function FaceRecognitionService($http) {
+    function FaceRecognitionService($http, $translate) {
         var service = {};
         service.faceId = null;
         service.isInitialized = false;
@@ -29,10 +29,10 @@
         };
 
         service.takeSnapshot = function() {
-            return this.init().then(takeSnapshot).then(detectFace).then(findSimilarFace).then(findFaceInFaceList);
+            return this.init().then(takeSnapshot).then(detectFace).then(findSimilarFace);
         };
 
-        service.addPerson = function(name, callback) {
+        service.addPerson = function(name) {
             return this.init().then(takeSnapshot).then(function(snapshot) { return addFaceToFaceList(snapshot, name); });
         };
 
@@ -70,7 +70,7 @@
 
         function findSimilarFace(faceId) {
             if(faceId === null)
-                return "Show your face";
+                return $translate.instant('faceRecognition.showyourface');
 
             return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/findsimilars',
@@ -87,8 +87,8 @@
             }).then(function mySucces(response) {
                 console.log(response);
                 if(response.data.length == 0)
-                    return null
-                return response.data[0].persistedFaceId;
+                    return null;
+                return findFaceInFaceList(response.data[0].persistedFaceId);
             }, function myError(response) {
                 console.log(response);
             });
@@ -96,7 +96,7 @@
 
         function findFaceInFaceList(faceId) {
             if(faceId == null)
-                return "I don't know you";
+                return $translate.instant('faceRecognition.idontknowyou');
 
             return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/facelists/' + config.faceRecognition.faceListId,
@@ -110,7 +110,7 @@
                         return response.data.persistedFaces[i].userData;
                     }
                 }
-                return 'Ups';
+                return null;
             }, function myError(response) {
                 console.log(response);
             });
@@ -130,6 +130,7 @@
                 }
             }).then(function mySucces(response) {
                 console.log(response);
+                return response.data.persistedFaceId;
             }, function myError(response) {
                 console.log(response);
             });
