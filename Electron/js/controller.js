@@ -106,8 +106,8 @@
 
             var refreshFaceRecognition = function() {
                 console.log ("Refreshing Face Recognition");
-                FaceRecognitionService.takeSnapshot().then(function(faceId) {
-                    $scope.faceId = faceId;
+                FaceRecognitionService.recognizePerson().then(function(personName) {
+                    $scope.personName = personName;
                 });
             };
 

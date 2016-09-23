@@ -134,7 +134,8 @@ var config = {
 		]
 	},
     faceRecognition: {
-        key: '',
+        emotionKey: '',
+        faceKey: '',
         faceListId: '',
     }
 };

@@ -28,12 +28,18 @@
             })
         };
 
-        service.takeSnapshot = function() {
+        service.recognizePerson = function() {
             return this.init().
                 then(takeSnapshot).
                 then(detectFace).
                 then(findSimilarFace).
                 then(getFaceName);
+        };
+
+        service.recognizeEmotion = function() {
+            return this.init().
+                then(takeSnapshot).
+                then(detectEmotion);
         };
 
         service.addPerson = function(name) {
@@ -76,13 +82,30 @@
                 },
                 headers: {
                     "Content-Type": "application/octet-stream",
-                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.faceKey
                 }
             }).then(function mySucces(response) {
                 console.log(response);
                 if(response.data.length == 0)
                     return null;
                 return response.data[0].faceId;
+            }, function myError(response) {
+                console.log(response);
+            });
+        };
+
+        function detectEmotion(snapshot) {
+            return $http({
+                url: 'https://api.projectoxford.ai/emotion/v1.0/recognize',
+                method: 'post',
+                data: snapshot,
+                headers: {
+                    "Content-Type": "application/octet-stream",
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.emotionKey
+                }
+            }).then(function mySucces(response) {
+                console.log(response);
+                return response.data[0];
             }, function myError(response) {
                 console.log(response);
             });
@@ -102,7 +125,7 @@
                 },
                 headers: {
                     "Content-Type": "application/json",
-                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.faceKey
                 }
             }).then(function mySucces(response) {
                 console.log(response);
@@ -129,7 +152,7 @@
             return $http({
                 url: 'https://api.projectoxford.ai/face/v1.0/facelists/' + config.faceRecognition.faceListId,
                 headers: {
-                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.faceKey
                 }
             }).then(function mySucces(response) {
                 console.log(response);
@@ -167,7 +190,7 @@
                 },
                 headers: {
                     "Content-Type": "application/octet-stream",
-                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.faceKey
                 }
             }).then(function mySucces(response) {
                 console.log(response);
@@ -185,7 +208,7 @@
                 url: 'https://api.projectoxford.ai/face/v1.0/facelists/'+config.faceRecognition.faceListId+'/persistedFaces/'+persistedFaceId,
                 method: 'delete',
                 headers: {
-                    "Ocp-Apim-Subscription-Key": config.faceRecognition.key
+                    "Ocp-Apim-Subscription-Key": config.faceRecognition.faceKey
                 }
             }).then(function mySucces(response) {
                 console.log(response);
