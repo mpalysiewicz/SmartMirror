@@ -39,7 +39,8 @@
         service.recognizeEmotion = function() {
             return this.init().
                 then(takeSnapshot).
-                then(detectEmotion);
+                then(detectEmotion).
+                then(getEmotionName);
         };
 
         service.addPerson = function(name) {
@@ -105,10 +106,34 @@
                 }
             }).then(function mySucces(response) {
                 console.log(response);
-                return response.data[0];
+                return response.data[0].scores;
             }, function myError(response) {
                 console.log(response);
             });
+        };
+
+        function getEmotionName(scores) {
+            console.log(scores);
+
+            var m1 = 0, m2 = 0;
+            var i1 = 0, i2 = 0;
+            for(var i in  scores) {
+                if(scores[i] > m1)
+                {
+                    m2 = m1;
+                    i2 = i1;
+                    m1 = scores[i];
+                    i1 = i;
+                }
+            }
+
+            console.log(i1 + ' ' + m1);
+            console.log(i2 + ' ' + m2);
+
+            if(m2 < 0.1)
+                return i1;
+            else
+                return i1 + ' ' + i2;
         };
 
         function findSimilarFace(faceId) {
