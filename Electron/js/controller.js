@@ -106,7 +106,7 @@
 
             var refreshFaceRecognition = function() {
                 console.log ("Refreshing Face Recognition");
-                FaceRecognitionService.recognizeEmotion().then(function(personName) {
+                FaceRecognitionService.recognizePerson().then(function(personName) {
                     $scope.personName = personName;
                 });
             };
