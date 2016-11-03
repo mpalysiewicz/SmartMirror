@@ -104,8 +104,8 @@
     <Compile Include="GuiComponents\HumidityComponent.xaml.cs">
       <DependentUpon>HumidityComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GuiComponents\MotionSensorComponent.xaml.cs">
-      <DependentUpon>MotionSensorComponent.xaml</DependentUpon>
+    <Compile Include="GuiComponents\IPComponent.xaml.cs">
+      <DependentUpon>IPComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="GuiComponents\TemperatureComponent.xaml.cs">
       <DependentUpon>TemperatureComponent.xaml</DependentUpon>
@@ -119,6 +119,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -161,9 +164,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GuiComponents\MotionSensorComponent.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="GuiComponents\IPComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="GuiComponents\TemperatureComponent.xaml">
       <SubType>Designer</SubType>
@@ -173,20 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sensors\Distance\ABB.Sensors.Distance.csproj">
-      <Project>{361611f5-d58d-4c60-af30-027e7e1d33c3}</Project>
-      <Name>ABB.Sensors.Distance</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sensors\Motion\ABB.Sensors.Motion.csproj">
-      <Project>{5451e666-ca8f-4cd9-ac41-168d6c66b6ca}</Project>
-      <Name>ABB.Sensors.Motion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sensors\Temperature\ABB.Sensors.TemperatureWrapper\ABB.Sensors.TemperatureWrapper.csproj">
-      <Project>{2e645a8b-fbfb-41de-b0ad-e38f7f8cc44c}</Project>
-      <Name>ABB.Sensors.TemperatureWrapper</Name>
-    </ProjectReference>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

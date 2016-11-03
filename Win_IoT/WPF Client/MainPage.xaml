@@ -8,43 +8,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="1080"
-    Width="1920"
-Background="Black"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"    
     Foreground="White"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
     >
 
-    
+    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="150" PanePlacement="Right">
+        <SplitView.Pane>
+            <StackPanel Background="Black" HorizontalAlignment="Right">
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="SettingsButton" FontFamily="Segoe UI" Content="&#x2699;"
+                    Width="50" Height="50" Background="Transparent" Click="SettingsButton_Click" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+                
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid x:Name="Controls" Background="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <Grid x:Name="Controls">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0"  HorizontalAlignment="Left" Margin="30,0,0,20" FontSize="36">Indoor</TextBlock>
+                <components:TemperatureComponent Grid.Row="1" Margin="30,0,0,10" x:Name="Room1Temp"/>
+                <components:HumidityComponent Grid.Row="2" Margin="30,0,0,10" x:Name="Room1Hum"/>
+                <components:DistanceComponent Grid.Row="3" Margin="30,0,0,10" x:Name="Room1Dist"/>
 
-            <TextBlock Grid.Row="0"  HorizontalAlignment="Left" Margin="30,0,0,20" FontSize="36">Indoor</TextBlock>
-        <components:TemperatureComponent Grid.Row="1" Margin="30,0,0,10" x:Name="Room1Temp"/>
-            <components:HumidityComponent Grid.Row="2" Margin="30,0,0,10" x:Name="Room1Hum"/>
-            <components:DistanceComponent Grid.Row="3" Margin="30,0,0,10" x:Name="Room1Dist"/>
-
-            <TextBlock Grid.Row="5" Margin="30,0,0,20" FontSize="36">Outdoor</TextBlock>
-            <components:TemperatureComponent Grid.Row="6" Margin="30,0,0,10" x:Name="Room2Temp"/>
-            <components:HumidityComponent Grid.Row="7" Margin="30,0,0,10" x:Name="Room2Hum"/>
-            <components:DustSensorComponent Grid.Row="8" Margin="30,0,0,10" x:Name="Room2Dust"/>
-            <!--<components:IPComponent Grid.Row="0" Grid.Column="5" x:Name="IP"/>-->
-
-        </Grid>        
+                <TextBlock Grid.Row="5" Margin="30,0,0,20" FontSize="36">Outdoor</TextBlock>
+                <components:TemperatureComponent Grid.Row="6" Margin="30,0,0,10" x:Name="Room2Temp"/>
+                <components:HumidityComponent Grid.Row="7" Margin="30,0,0,10" x:Name="Room2Hum"/>
+                <components:DustSensorComponent Grid.Row="8" Margin="30,0,0,10" x:Name="Room2Dust"/>
+                <!--<components:IPComponent Grid.Row="0" Grid.Column="5" x:Name="IP"/>-->
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+     
     
 
 </Page>

@@ -1,6 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using ABB.Sensors.Distance;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace ABB.MagicMirror
 {
@@ -17,6 +16,16 @@ namespace ABB.MagicMirror
             Room2Temp.SensorId = "room2_temp";
             Room2Hum.SensorId = "room2_hum";
             Room2Dust.SensorId = "room2_dust";
-        }             
+        }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
