@@ -4,7 +4,9 @@ var domoticUrl = 'http://192.168.0.54:8080';
 var sensorsServiceUrl = 'http://192.168.0.55';
 
 function sleep(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
+    return new Promise(function(resolve){
+		setTimeout(resolve, time)
+	});
 }
 
 function ReadFromDomotic() {
