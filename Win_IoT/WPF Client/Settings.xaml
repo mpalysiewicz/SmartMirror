@@ -34,7 +34,7 @@
                 </TextBlock.Text>
             </TextBlock>
             <TextBlock Text="Address" />
-            <TextBox></TextBox>            
+            <TextBox x:Name="sensorsSvcUrlTbx"></TextBox>            
         </StackPanel>
     </StackPanel>
 </Page>

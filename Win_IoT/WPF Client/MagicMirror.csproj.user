@@ -6,7 +6,7 @@
     <DeviceId>30F105C9-681E-420b-A277-7C086EAD8A4E</DeviceId>
     <AuthenticationMode>Universal</AuthenticationMode>
     <CreateCleanLayout>true</CreateCleanLayout>
-    <RemoteDebugMachine>10.3.55.146</RemoteDebugMachine>
+    <RemoteDebugMachine>192.168.0.56</RemoteDebugMachine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <RemoteDebugMachine>169.254.204.218</RemoteDebugMachine>
@@ -25,5 +25,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+    <RemoteDebugMachine>192.168.0.56</RemoteDebugMachine>
   </PropertyGroup>
 </Project>

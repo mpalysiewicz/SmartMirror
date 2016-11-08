@@ -8,7 +8,7 @@ namespace ABB.MagicMirror
 {
     public static class SensorServiceWrapper
     {
-        //private const string url = @"http://10.3.54.74:8082";
+        private const string defaultUrl = @"http://192.168.0.50:8082";
 
         public static string Url
         {
@@ -16,7 +16,7 @@ namespace ABB.MagicMirror
             {
                 var localSettings = ApplicationData.Current.LocalSettings;
                 var value = localSettings.Values["SensorServiceUrl"] as string;
-                return value;
+                return string.IsNullOrEmpty(value) ? defaultUrl : value;
             }
         }
 
@@ -42,16 +42,24 @@ namespace ABB.MagicMirror
 
         private static HttpClient GetClient(string url)
         {
-            var client = new HttpClient
+            try
             {
-                BaseAddress = new Uri(url)
-            };
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
 
 
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            return client;
+                return client;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

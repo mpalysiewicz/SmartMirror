@@ -11,7 +11,7 @@ namespace HumidityService
 {
     public sealed class StartupTask : IBackgroundTask
     {
-        private string url = @"http://10.3.54.74:8082";
+        private string url = @"http://192.168.0.50:8082";
         private TempHumiditySender tempHumidityService;
         public void Run(IBackgroundTaskInstance taskInstance)
         {

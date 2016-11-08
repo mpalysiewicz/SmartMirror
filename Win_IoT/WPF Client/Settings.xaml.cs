@@ -25,6 +25,13 @@ namespace ABB.MagicMirror
             this.InitializeComponent();
         }
 
-      
+
+        public string SensorsServiceUrl
+        {
+            get
+            {
+                return sensorsSvcUrlTbx.Text;
+            }
+        }
     }
 }

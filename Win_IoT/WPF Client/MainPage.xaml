@@ -22,7 +22,7 @@
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="SettingsButton" FontFamily="Segoe UI" Content="&#x2699;"
-                    Width="50" Height="50" Background="Transparent" Click="SettingsButton_Click" Foreground="White"/>
+                            Width="50" Height="50" Background="Transparent" Click="SettingsButton_Click" Foreground="White"/>
                 </StackPanel>
             </StackPanel>
                 
