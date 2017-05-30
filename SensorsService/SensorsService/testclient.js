@@ -4,9 +4,9 @@ request.post(
     'http://localhost:8082/save',
     { json: {
         "name": "Salon Temerature",
-        "id": "room2_temp",
+        "id": "salon_temp",
         "data": {
-            "measurement_time": "2016-09-08 20:06:15",
+            "measurement_time": "2017-05-30 20:06:15",
             "value": "22,2",
             "unit": "C"
         }   

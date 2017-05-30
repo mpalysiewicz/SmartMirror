@@ -33,12 +33,12 @@
     ]
   },
 	
-  "room2_temp": {
-    "name": "Room 2 Temerature",
-    "id": "room2_temp",
+  "salon_temp": {
+    "name": "Salon Temperatura",
+    "id": "salon_temp",
     "data": [
         {
-          "measurement_time": "2016-09-08 20:08:22",
+          "measurement_time": "2017-05-30 20:08:22",
           "value": "26",
           "unit": "C"
         }
