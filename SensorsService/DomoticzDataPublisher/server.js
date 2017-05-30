@@ -1,7 +1,7 @@
 ﻿var request = require('request');
 var interval = 60000;
-var domoticUrl = 'http://192.168.0.54:8080';
-var sensorsServiceUrl = 'http://192.168.0.55';
+var domoticzUrl = 'http://192.168.1.7:8080';
+var sensorsServiceUrl = 'http://192.168.1.8';
 
 function sleep(time) {
     return new Promise(function(resolve){
@@ -9,16 +9,16 @@ function sleep(time) {
 	});
 }
 
-function ReadFromDomotic() {
-    console.log("Reading from Domotic" + GetCurrentDateTime());
-    ReadAndPost(2, "room2_hum", "Room 2 humidity", "Humidity", "%");
-    ReadAndPost(2, "room2_temp", "Room 2 temperature", "Temp", "°C");
-    ReadAndPost(5, "room2_dust", "Room 2 dust", "Data", "ppm"); //"µg/m³"
-    setTimeout(function () { ReadFromDomotic() }, interval);
+function ReadFromDomoticz() {
+    console.log("Reading from Domoticz" + GetCurrentDateTime());
+    ReadAndPost(141, "salon_hum", "Salon wilgotność", "Humidity", "%");
+    ReadAndPost(141, "salon_temp", "Salon temperatura", "Temp", "°C");
+    ReadAndPost(269, "antresola_dust", "Czujnik pyłu", "Data", "ppm"); //"µg/m³"
+    setTimeout(function () { ReadFromDomoticz() }, interval);
 }
 
 function ReadAndPost(domo_id, serv_id, name, property, unit) {
-    request.get(domoticUrl+'/json.htm?type=devices&rid=' + domo_id,
+    request.get(domoticzUrl+'/json.htm?type=devices&rid=' + domo_id,
         function (error, response, body) {
             var result = JSON.parse(body).result[0];
             var value = parseValue(result[property],serv_id.split("_")[1]);
@@ -61,4 +61,4 @@ function GetCurrentDateTime() {
     return now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 }
 
-ReadFromDomotic();
+ReadFromDomoticz();

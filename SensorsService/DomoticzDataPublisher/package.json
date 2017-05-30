@@ -1,7 +1,7 @@
 {
-  "name": "domotic-data-publisher",
+  "name": "domoticz-data-publisher",
   "version": "0.0.0",
-  "description": "DomoticDataPublisher",
+  "description": "DomoticzDataPublisher",
   "main": "server.js",
   "author": {
     "name": "grzeg"
